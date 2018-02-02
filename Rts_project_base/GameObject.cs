@@ -8,5 +8,33 @@ namespace Rts_project_base
 {
     class GameObject
     {
+
+        #region Fields
+
+
+
+        #endregion
+
+        #region Property
+        public GameObject()
+        {
+        }
+        
+        #endregion
+
+        #region Methods
+        public virtual void Draw()
+        {
+
+        }
+
+        public virtual void Update()
+        {
+
+        }
+
+        #endregion
+
     }
+}
 }

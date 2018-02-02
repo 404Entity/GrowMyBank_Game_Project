@@ -6,7 +6,27 @@ using System.Threading.Tasks;
 
 namespace Rts_project_base
 {
-    class Bank
+    class Bank : GameObject
     {
+        #region Fields
+        private int coalCount;
+        private int goldCount;
+        #endregion
+
+        #region Property
+        public Bank()
+        {
+        }
+        public int CoalCount { get => coalCount; set => coalCount = value; }
+        public int GoldCount { get => goldCount; set => goldCount = value; }
+        #endregion
+
+        #region Methods
+        public void Upgrade()
+        {
+
+        }
+
+        #endregion
     }
 }

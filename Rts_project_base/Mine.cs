@@ -6,7 +6,26 @@ using System.Threading.Tasks;
 
 namespace Rts_project_base
 {
-    class Mine
+    class Mine : GameObject
     {
+        #region Fields
+        private int coalAmount;
+
+
+        #endregion
+
+        #region Property
+        public Mine()
+        {
+        }
+
+        public int CoalAmount { get => coalAmount; set => coalAmount = value; }
+
+        #endregion
+
+        #region Methods
+
+
+        #endregion
     }
 }
