@@ -14,9 +14,10 @@ namespace Rts_project_base
 {
     public partial class Form1 : Form
     {
-#region Fields
+        #region Fields
         private GameWorld gm;
         private Graphics dc;
+        public int count = 0;
         #endregion
         public Graphics DC
         {
@@ -24,13 +25,13 @@ namespace Rts_project_base
         }
         public Form1()
         {
-            
+
             InitializeComponent();
             //initialize a new thread to run the Gameloop
- 
+
             //initialize the Gameworld
             gm = GameWorld.Instance;
-            
+
         }
         private void initLoop()
         {
@@ -39,15 +40,17 @@ namespace Rts_project_base
             looperThread.Start();
         }
 
-        static bool runGame = true;
+        public static bool runGame = true;
         private void gamelooper()
         {
             ///<remarks>CurrentThread = looperThread</remarks>
             while (runGame)
             {
-                MessageBox.Show("Hello from Loop Thread");
-                Thread.Sleep(5000);
+                //MessageBox.Show("Hello from Loop Thread");
+                //Thread.Sleep(100);
                 gm.Gameloop();
+                count++;
+                label1.Invoke((MethodInvoker)delegate { label1.Text = count.ToString(); });
             }
         }
 
@@ -73,7 +76,7 @@ namespace Rts_project_base
         }
         private void HelloFromTheOhterSide()
         {
-            label1.Invoke((MethodInvoker)delegate{ label1.Text = "Get out off here "; });
+            label1.Invoke((MethodInvoker)delegate { label1.Text = "Get out off here "; });
         }
     }
 }

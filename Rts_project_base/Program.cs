@@ -8,6 +8,14 @@ namespace Rts_project_base
 {
     static class Program
     {
+        internal static Form1 Form1
+        {
+            get => default(Form1);
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
