@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Rts_project_base
 {
@@ -11,21 +12,35 @@ namespace Rts_project_base
         #region Fields
         private float speed;
         private int workers;
-
         #endregion
-
         #region Property
+        public int Workers { get {return workers;} set { workers = value;} }
+        public float Speed { get { return speed; } set { speed = value; } }
+        #endregion
+        #region Constructor
         public Worker()
         {
         }
-        public int Workers { get => workers; set => workers = value; }
-        public float Speed { get => speed; set => speed = value; }
-        
         #endregion
-
         #region Methods
 
+        private void InitWorkerThread()
+        {
+            Thread WorkerThread = new Thread(Work);
 
+            WorkerThread.Start();
+        }
+        public void Work()
+        {
+            while (true)
+            {
+
+            }
+        }
+        public  void Mine()
+        {
+
+        }
         #endregion
 
     }

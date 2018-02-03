@@ -20,3 +20,6 @@ C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\obj\De
 C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.csproj.CoreCompileInputs.cache
 C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.exe
 C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.pdb
+C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Rts_project_base.exe.config
+C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.exe
+C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.pdb

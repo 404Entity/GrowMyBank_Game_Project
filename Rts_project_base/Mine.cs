@@ -10,7 +10,7 @@ namespace Rts_project_base
     {
         #region Fields
         private int coalAmount;
-
+        
 
         #endregion
 
@@ -19,7 +19,7 @@ namespace Rts_project_base
         {
         }
 
-        public int CoalAmount { get => coalAmount; set => coalAmount = value; }
+        public int CoalAmount { get { return coalAmount; } set {coalAmount = value; } }
 
         #endregion
 

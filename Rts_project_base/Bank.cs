@@ -14,13 +14,15 @@ namespace Rts_project_base
         #endregion
 
         #region Property
+        public int CoalCount { get { return coalCount; } set { coalCount = value; } }
+        public int GoldCount { get { return goldCount; } set { goldCount = value; } }
+        #endregion
+
+        #region Constructor
         public Bank()
         {
         }
-        public int CoalCount { get => coalCount; set => coalCount = value; }
-        public int GoldCount { get => goldCount; set => goldCount = value; }
         #endregion
-
         #region Methods
         public void Upgrade()
         {
