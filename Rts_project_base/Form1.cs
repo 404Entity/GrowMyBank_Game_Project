@@ -17,6 +17,7 @@ namespace Rts_project_base
 #region Fields
         private GameWorld gm;
         private Graphics dc;
+        private Rectangle displayRectangle = new Rectangle(0,0,960,540);
         #endregion
         public Graphics DC
         {
@@ -29,7 +30,7 @@ namespace Rts_project_base
             //initialize a new thread to run the Gameloop
  
             //initialize the Gameworld
-            gm = GameWorld.Instance;
+            
             
         }
         private void initLoop()
@@ -39,28 +40,35 @@ namespace Rts_project_base
             looperThread.Start();
         }
 
-        static bool runGame = true;
+        public static bool runGame = true;
         private void gamelooper()
         {
             ///<remarks>CurrentThread = looperThread</remarks>
             while (runGame)
             {
-                MessageBox.Show("Hello from Loop Thread");
-                Thread.Sleep(5000);
+                //MessageBox.Show("Hello from Loop Thread");
+                Thread.Sleep(5);
                 gm.Gameloop();
             }
         }
-
+        
         private void Form1_Load_1(object sender, EventArgs e)
         {
+
             if (dc == null)
             {
                 dc = CreateGraphics();
             }
+            //gm = GameWorld.Instance;
+            gm = new GameWorld(CreateGraphics(), displayRectangle);
             //initialize the game loop
             initLoop();
         }
-
+        private void SetupUi()
+        {
+            button1.Text = "Show text";
+            button2.Text = "Buy Worker";
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             Thread t1 = new Thread(HelloFromTheOhterSide);
@@ -74,6 +82,11 @@ namespace Rts_project_base
         private void HelloFromTheOhterSide()
         {
             label1.Invoke((MethodInvoker)delegate{ label1.Text = "Get out off here "; });
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

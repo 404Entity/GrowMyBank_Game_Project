@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Drawing;
+using System.Numerics;
 
 namespace Rts_project_base
 {
@@ -18,7 +20,7 @@ namespace Rts_project_base
         public float Speed { get { return speed; } set { speed = value; } }
         #endregion
         #region Constructor
-        public Worker()
+        public Worker(Vector2 position,string spritePath, float scaleFactor): base(position,spritePath,scaleFactor)
         {
         }
         #endregion

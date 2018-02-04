@@ -17,10 +17,15 @@ namespace Rts_project_base
         #region Simpleton
         public static object kGameworldInstance = new object();
         private static GameWorld _instance;
-        private GameWorld()
+        public GameWorld(Graphics draws, Rectangle displayRectangle) // change to private to make Simpletom work as intended by for testing purpose leave it public 
         {
-            
+            this.backBuffer = BufferedGraphicsManager.Current.Allocate(draws, displayRectangle);
+            this.draws = backBuffer.Graphics;
+            gameObjectList = new List<GameObject>();
+            Setup();
+            Draw();
         }
+        /*
         public static GameWorld Instance
         {
             get
@@ -29,7 +34,7 @@ namespace Rts_project_base
                 {
                     lock (kGameworldInstance)
                     {
-                        
+
                         //Creates the Gameworld Instance
                         _instance = new GameWorld();
                     }
@@ -37,13 +42,15 @@ namespace Rts_project_base
                 return _instance;
             }
         }
+        */
         #endregion
 
         #region Fields
         private Graphics draws;
-        private BufferedGraphics backbuffer;
+        private BufferedGraphics backBuffer;
         private float currentFps;
         private DateTime endTime;
+        private List<GameObject> gameObjectList;
         #endregion
         #region Properties
         #endregion
@@ -51,10 +58,12 @@ namespace Rts_project_base
         private void Setup()
         {
             //intialize the componets of the gameworld
+            gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1));
+            Form1.runGame = true;
         }
         public void Draw()
         {
-
+            DrawContent();
         }
         public void DrawContent()
         {
@@ -63,12 +72,13 @@ namespace Rts_project_base
             /// </summary>
             //Draw the Graphics of the Game
             draws.Clear(Color.White);
-            /*
-             foreach(GameObject drawable in gameObjectList)
-             {
-            drawable.Draw(); 
+
+            foreach (GameObject drawable in gameObjectList)
+            {
+                drawable.Draw(draws);
+               
             }
-             */
+            backBuffer.Render();
         }
         public void DrawUi()
         {

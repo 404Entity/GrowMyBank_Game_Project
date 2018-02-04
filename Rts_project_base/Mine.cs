@@ -3,24 +3,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Drawing;
+using System.Numerics;
 
 namespace Rts_project_base
 {
     class Mine : GameObject
     {
         #region Fields
-        private int coalAmount;
-        
+        private int resourceAmount;
+        public Mutex EnteranceKey;
 
         #endregion
 
         #region Property
-        public Mine()
+
+
+        public int ResourceAmount { get { return resourceAmount; } set { resourceAmount = value; } }
+
+        #endregion
+        #region Constructor
+        public Mine(Vector2 position, string spritePath, float scaleFactor) : base(position, spritePath, scaleFactor)
         {
+
         }
-
-        public int CoalAmount { get { return coalAmount; } set {coalAmount = value; } }
-
         #endregion
 
         #region Methods
