@@ -64,6 +64,7 @@ namespace Rts_project_base
         public void Draw()
         {
             DrawContent();
+       
         }
         public void DrawContent()
         {
@@ -76,13 +77,15 @@ namespace Rts_project_base
             foreach (GameObject drawable in gameObjectList)
             {
                 drawable.Draw(draws);
-               
+                DrawUi();
+
             }
             backBuffer.Render();
         }
         public void DrawUi()
         {
-
+            Font f = new Font("Arial", 16);
+            draws.DrawString(string.Format("FPS: {0}", currentFps), f, Brushes.Black, 550, 0);
         }
         public void Update()
         {
@@ -92,7 +95,10 @@ namespace Rts_project_base
             /*
              foreach(GameObject gO in gameObjectList)
              {
-             
+             gO.Update(Fps)
+             {
+
+             }
             }
              */
 
@@ -103,6 +109,7 @@ namespace Rts_project_base
             TimeSpan deltaTime = startime - endTime;
             int miliSecond = deltaTime.Milliseconds > 0 ? deltaTime.Milliseconds : 1;
             currentFps = 1000 / miliSecond;
+            endTime = DateTime.Now;
             Draw();
             Update();
         }

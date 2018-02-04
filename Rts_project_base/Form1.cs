@@ -47,7 +47,7 @@ namespace Rts_project_base
             while (runGame)
             {
                 //MessageBox.Show("Hello from Loop Thread");
-                Thread.Sleep(5);
+                //Thread.Sleep(5);
                 gm.Gameloop();
             }
         }
