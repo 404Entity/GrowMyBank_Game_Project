@@ -7,10 +7,10 @@ using System.Threading;
 using System.Numerics;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Reflection;
 
 namespace Rts_project_base
 {
+    
     sealed class GameWorld
     {
         //only allow one instance of the gameworld class. useing Simpleton Pattern
@@ -21,6 +21,8 @@ namespace Rts_project_base
         {
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(draws, displayRectangle);
             this.draws = backBuffer.Graphics;
+            this.displayRect = displayRectangle;
+            unitRect = new RectangleF(0,0,(displayRect.Width/50),(displayRect.Height/50));
             gameObjectList = new List<GameObject>();
             Setup();
             Draw();
@@ -44,8 +46,9 @@ namespace Rts_project_base
         }
         */
         #endregion
-
         #region Fields
+        private Rectangle displayRect;
+        private RectangleF unitRect;
         private Graphics draws;
         private BufferedGraphics backBuffer;
         private float currentFps;
@@ -53,13 +56,29 @@ namespace Rts_project_base
         private List<GameObject> gameObjectList;
         #endregion
         #region Properties
+        public List<GameObject> GameObjectList
+        {
+            get { return gameObjectList; }
+            set { gameObjectList = value; }
+        }
+        public List<GameObject> AddGameObject
+        {
+            get { return AddGameObject; }
+            set { AddGameObject = value; }
+        }
+        public List<GameObject> RemoveGameObject
+        {
+            get { return RemoveGameObject; }
+            set { RemoveGameObject = value; }
+        }
         #endregion
 
         private void Setup()
         {
             //intialize the componets of the gameworld
-            gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1));
-            Form1.runGame = true;
+            gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1,"GoldMinene"));
+            //gameObjectList.Add(new Bank(new Vector2(200, 200), @"\hello", 1));
+            GameForm.runGame = true;
         }
         public void Draw()
         {
@@ -68,6 +87,7 @@ namespace Rts_project_base
         }
         public void DrawContent()
         {
+            
             ///<summary>
             ///Draws the games ui
             /// </summary>
@@ -78,14 +98,41 @@ namespace Rts_project_base
             {
                 drawable.Draw(draws);
                 DrawUi();
-
+                
             }
+            // Test DrawGrid 
+            /* 
+            RectangleF testRect = unitRect;
+            for (int i = 0; i < 50; i++)
+            {
+                if (i != 0)
+                {
+                    testRect.Y += testRect.Height;
+                }
+                testRect.X = unitRect.X;
+                for (int j = 0; j < 50; j++)
+                { 
+                    RectangleF instanceRect = testRect;
+                    if (j < 1)
+                    {
+                        draws.DrawRectangle(new Pen(Brushes.Red), instanceRect.X, instanceRect.Y, instanceRect.Width, instanceRect.Height);
+                    }
+                    else
+                    {
+
+                        draws.DrawRectangle(new Pen(Brushes.Red), instanceRect.X + instanceRect.Width, instanceRect.Y, instanceRect.Width, instanceRect.Height);
+                        testRect.X += instanceRect.Width;
+                    }
+                }
+          
+            }*/
             backBuffer.Render();
         }
         public void DrawUi()
         {
             Font f = new Font("Arial", 16);
             draws.DrawString(string.Format("FPS: {0}", currentFps), f, Brushes.Black, 550, 0);
+            
         }
         public void Update()
         {

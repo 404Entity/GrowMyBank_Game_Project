@@ -24,10 +24,10 @@ C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Rt
 C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.exe
 C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.pdb
 C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.csprojResolveAssemblyReference.cache
-C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.Form1.resources
 C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.Properties.Resources.resources
 C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.csproj.GenerateResource.Cache
 C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Images\Mine_Test1..png
 C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Rts_project_base.exe
 C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Rts_project_base.pdb
 C:\Users\MIKZ\source\repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.csproj.CoreCompileInputs.cache
+C:\Users\MIKZ\source\repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.GameForm.resources

@@ -22,7 +22,7 @@ namespace Rts_project_base
         public float Speed { get { return speed; } set { speed = value; } }
         #endregion
         #region Constructor
-        public Worker(Vector2 position,string spritePath, float scaleFactor): base(position,spritePath,scaleFactor)
+        public Worker(Vector2 position,string spritePath, float scaleFactor,string name): base(position,spritePath,scaleFactor, name)
         {
         }
         #endregion

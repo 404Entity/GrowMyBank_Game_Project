@@ -12,26 +12,29 @@ using System.Reflection;
 
 namespace Rts_project_base
 {
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
 #region Fields
         private GameWorld gm;
         private Graphics dc;
-        private Rectangle displayRectangle = new Rectangle(0,0,960,540);
+        private Rectangle displayRectangle;
         #endregion
         public Graphics DC
         {
             get { return dc; }
         }
-        public Form1()
+
+        internal GameObject SelectedObject { get => selectedObject; set => selectedObject = value; }
+
+        public GameForm()
         {
-            
             InitializeComponent();
             //initialize a new thread to run the Gameloop
- 
+    
             //initialize the Gameworld
-            
-            
+            displayRectangle = new Rectangle(0, 0, 1300, 900); 
+          
+
         }
         private void initLoop()
         {
@@ -49,21 +52,28 @@ namespace Rts_project_base
                 //MessageBox.Show("Hello from Loop Thread");
                 //Thread.Sleep(5);
                 gm.Gameloop();
+                Cursormovement();
             }
         }
         
         private void Form1_Load_1(object sender, EventArgs e)
         {
-
             if (dc == null)
             {
                 dc = CreateGraphics();
             }
             //gm = GameWorld.Instance;
+            SetupUi();
             gm = new GameWorld(CreateGraphics(), displayRectangle);
             //initialize the game loop
             initLoop();
         }
+
+        private void ActiveForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private void SetupUi()
         {
             button1.Text = "Show text";
@@ -90,6 +100,66 @@ namespace Rts_project_base
             //buy worker Button
 
             //Worker = new Worker()
+        }
+
+        public void Cursormovement()
+        {
+            label1.Invoke((MethodInvoker)delegate { label1.Text = Cursor.Position.X.ToString(); });
+            label2.Invoke((MethodInvoker)delegate { label2.Text = Cursor.Position.Y.ToString(); });
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
+        {
+
+        }
+        private GameObject selectedObject;
+        private void GameForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            label3.Invoke((MethodInvoker)delegate { label3.Text = GameForm.MousePosition.X.ToString(); });
+            label4.Invoke((MethodInvoker)delegate { label4.Text = GameForm.MousePosition.Y.ToString(); });
+            
+            string showString = "X" + Cursor.Position.X + " : " + "Y" + Cursor.Position.Y;
+            //MessageBox.Show(showString);
+            
+            foreach (GameObject item in gm.GameObjectList)
+            {
+                if (item.CheckCords(Cursor.Position.X,Cursor.Position.Y))
+                {
+                    selectedObject = item;
+                    MessageBox.Show(selectedObject.ObjectName);
+                }
+            }
+        }
+
+        private void GameForm_MouseHover(object sender, EventArgs e)
+        {
+            foreach (GameObject item in gm.GameObjectList)
+            {
+                if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
+                {
+                    item.ishovered = true;
+                }
+                else
+                {
+                    item.ishovered = false;
+                }
+            }
         }
     }
 }
