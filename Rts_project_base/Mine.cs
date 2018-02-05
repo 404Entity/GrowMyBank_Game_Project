@@ -24,7 +24,7 @@ namespace Rts_project_base
 
         #endregion
         #region Constructor
-        public Mine(Vector2 position, string spritePath, float scaleFactor) : base(position, spritePath, scaleFactor)
+        public Mine(Vector2 position, string spritePath, float scaleFactor, string name) : base(position, spritePath, scaleFactor, name)
         {
 
         }
