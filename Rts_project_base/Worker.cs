@@ -18,7 +18,7 @@ namespace Rts_project_base
         private bool carryingResource;
         #endregion
         #region Property
-        public int Workers { get {return workers;} set { workers = value;} }
+       
         public float Speed { get { return speed; } set { speed = value; } }
         #endregion
         #region Constructor
