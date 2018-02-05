@@ -19,7 +19,7 @@ namespace Rts_project_base
         private static GameWorld _instance;
         private GameWorld()
         {
-            
+            myDelegate = new AddListItem(AddListMethod);
         }
         public static GameWorld Instance
         {
@@ -44,18 +44,22 @@ namespace Rts_project_base
         private BufferedGraphics backbuffer;
         private float currentFps;
         private DateTime endTime;
+        public delegate void AddListItem();
+        public AddListItem myDelegate;
         #endregion
         #region Properties
         #endregion
+        public void AddListMethod()
+        {
 
+        }
         private void Setup()
         {
             //intialize the componets of the gameworld
-        }
-        public void Draw()
-        {
 
+            Form1.runGame = true;
         }
+
         public void DrawContent()
         {
             ///<summary>
@@ -85,15 +89,15 @@ namespace Rts_project_base
              
             }
              */
-
+            ///MessageBox.Show("Hello from GameWorld","oH");
         }
         public void Gameloop()
         {
             DateTime startime = DateTime.Now;
             TimeSpan deltaTime = startime - endTime;
             int miliSecond = deltaTime.Milliseconds > 0 ? deltaTime.Milliseconds : 1;
-            currentFps = 1000 / miliSecond;
-            Draw();
+            
+               
             Update();
         }
     }
