@@ -9,8 +9,10 @@ namespace Rts_project_base
     class Mine : GameObject
     {
         private bool busy = false;
-        private string name = "Mine";
+        private string name = "GoldMine";
         private string Image = "";
+        private int coal = 1;
+        private int gold = 2; //Change value
 
 
 
@@ -28,10 +30,11 @@ namespace Rts_project_base
             }
         }
 
-        public Mine(string name, bool busy)
+        public GoldMine(string name, bool busy, int gold)
         {
             this.busy = busy;
             this.name = name;
+            this.gold = gold;
         }
 
     }
