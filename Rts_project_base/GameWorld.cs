@@ -11,7 +11,7 @@ using System.Reflection;
 
 namespace Rts_project_base
 {
-    sealed class GameWorld
+    partial class GameWorld
     {
         //only allow one instance of the gameworld class. useing Simpleton Pattern
         #region Simpleton
@@ -50,7 +50,9 @@ namespace Rts_project_base
         private BufferedGraphics backBuffer;
         private float currentFps;
         private DateTime endTime;
-        private List<GameObject> gameObjectList;
+        private static List<GameObject> gameObjectList;
+        LevelGenerator lvlgen = new LevelGenerator();
+
         #endregion
         #region Properties
         #endregion
@@ -73,14 +75,15 @@ namespace Rts_project_base
             /// </summary>
             //Draw the Graphics of the Game
             draws.Clear(Color.White);
-
             foreach (GameObject drawable in gameObjectList)
             {
                 drawable.Draw(draws);
                 DrawUi();
-
+                lvlgen.LoadWorld(draws);
             }
             backBuffer.Render();
+
+            
         }
         public void DrawUi()
         {
