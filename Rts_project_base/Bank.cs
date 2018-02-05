@@ -30,9 +30,9 @@ namespace Rts_project_base
         {
             if(goldCount == 500)
             {
-                Worker worker = new Worker(Vector2 position, string spritePath, float scaleFactor): base(position, spritePath, scaleFactor);
+                Worker worker = new Worker(position, spritePath, scaleFactor): base(position, spritePath, scaleFactor);
             }
-
+            
                 
 
         }
