@@ -28,6 +28,12 @@ namespace Rts_project_base
         #region Methods
         public void Upgrade()
         {
+            if(goldCount == 500)
+            {
+                Worker worker = new Worker(Vector2 position, string spritePath, float scaleFactor): base(position, spritePath, scaleFactor);
+            }
+
+                
 
         }
 
