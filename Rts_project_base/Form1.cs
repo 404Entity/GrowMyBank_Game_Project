@@ -88,8 +88,8 @@ namespace Rts_project_base
         private void button2_Click(object sender, EventArgs e)
         {
             //buy worker Button
-
-            //Worker = new Worker()
+            gm.
+            Worker = new Worker()
         }
     }
 }
