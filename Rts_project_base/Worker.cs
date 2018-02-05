@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Drawing;
 using System.Numerics;
+using System.Windows.Forms;
 
 namespace Rts_project_base
 {
@@ -13,7 +14,8 @@ namespace Rts_project_base
     {
         #region Fields
         private float speed;
-        private int workers;
+        private bool working;
+        private bool carryingResource;
         #endregion
         #region Property
         public int Workers { get {return workers;} set { workers = value;} }
@@ -34,15 +36,17 @@ namespace Rts_project_base
         }
         public void Work()
         {
-            while (true)
+            while (working)
             {
-
+                
             }
-        }
-        public  void Mine()
+        }   
+        public void Mine()
         {
-
+            Thread.Sleep(3000);//simulates the worker mining
+            carryingResource = true;
         }
+
         #endregion
 
     }

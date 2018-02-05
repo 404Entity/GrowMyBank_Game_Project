@@ -81,12 +81,15 @@ namespace Rts_project_base
         }
         private void HelloFromTheOhterSide()
         {
+            //test code
             label1.Invoke((MethodInvoker)delegate{ label1.Text = "Get out off here "; });
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //buy worker Button
 
+            //Worker = new Worker()
         }
     }
 }
