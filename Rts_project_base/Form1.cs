@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Reflection;
+using System.Numerics;
 
 namespace Rts_project_base
 {
@@ -18,6 +19,7 @@ namespace Rts_project_base
         private GameWorld gm;
         private Graphics dc;
         private Rectangle displayRectangle = new Rectangle(0,0,960,540);
+        private static bool upgradeTwo = false;
         #endregion
         public Graphics DC
         {
@@ -94,7 +96,25 @@ namespace Rts_project_base
 
         private void Upgrade_Click(object sender, EventArgs e)
         {
+            if(Bank.goldCount >= 500)
+            {
+                Upgrade.Visible = true;
+                GameWorld.gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1));
+                Worker.workerAmount = 3;
+                upgradeTwo = true; 
 
+                if(upgradeTwo = true && Bank.goldCount >= 750)
+                {
+                    Upgrade.Visible = true;
+                    Thread.Sleep(2000);
+                }
+            }
+            
+            else
+            {
+                Upgrade.Visible = false;
+            }
+            Upgrade.Visible = false;
         }
     }
 }

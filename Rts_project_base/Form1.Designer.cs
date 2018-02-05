@@ -113,6 +113,7 @@
             this.Upgrade.TabIndex = 4;
             this.Upgrade.Text = "Upgrade";
             this.Upgrade.UseVisualStyleBackColor = true;
+            this.Upgrade.Visible = false;
             this.Upgrade.Click += new System.EventHandler(this.Upgrade_Click);
             // 
             // Form1

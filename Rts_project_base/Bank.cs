@@ -14,7 +14,7 @@ namespace Rts_project_base
     {
         #region Fields
         private int coalCount;
-        private int goldCount;
+        public static int goldCount;
         #endregion
 
         #region Property
@@ -28,14 +28,7 @@ namespace Rts_project_base
         }
         #endregion
         #region Methods
-        public void Upgrade()
-        {
-            if(goldCount >= 500)
-            {
-               GameWorld.gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1));
-            }
 
-        }
 
         #endregion
     }
