@@ -8,6 +8,8 @@ using System.Numerics;
 
 namespace Rts_project_base
 {
+     
+
     class Bank : GameObject
     {
         #region Fields
@@ -30,7 +32,8 @@ namespace Rts_project_base
         {
             if(goldCount == 500)
             {
-                Worker worker = new Worker(position, spritePath, scaleFactor): base(position, spritePath, scaleFactor);
+                Worker worker = new Worker(position, "4", scaleFactor);
+                
             }
             
                 

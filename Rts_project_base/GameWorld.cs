@@ -11,6 +11,7 @@ using System.Reflection;
 
 namespace Rts_project_base
 {
+
     sealed class GameWorld
     {
         //only allow one instance of the gameworld class. useing Simpleton Pattern
@@ -53,12 +54,19 @@ namespace Rts_project_base
         private List<GameObject> gameObjectList;
         #endregion
         #region Properties
+        public List<GameObject> GameObjectList
+        {
+            get { return gameObjectList; }
+            set { gameObjectList = value; }
+        }
         #endregion
 
         private void Setup()
         {
             //intialize the componets of the gameworld
             gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1));
+            gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1));
+            
             Form1.runGame = true;
         }
         public void Draw()
