@@ -51,7 +51,7 @@ namespace Rts_project_base
         private BufferedGraphics backBuffer;
         private float currentFps;
         private DateTime endTime;
-        private List<GameObject> gameObjectList;
+        public static List<GameObject> gameObjectList;
         #endregion
         #region Properties
         public List<GameObject> GameObjectList

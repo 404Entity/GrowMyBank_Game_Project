@@ -34,6 +34,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.Upgrade = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,11 +105,22 @@
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
             // 
+            // Upgrade
+            // 
+            this.Upgrade.Location = new System.Drawing.Point(857, 463);
+            this.Upgrade.Name = "Upgrade";
+            this.Upgrade.Size = new System.Drawing.Size(75, 23);
+            this.Upgrade.TabIndex = 4;
+            this.Upgrade.Text = "Upgrade";
+            this.Upgrade.UseVisualStyleBackColor = true;
+            this.Upgrade.Click += new System.EventHandler(this.Upgrade_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(944, 502);
+            this.Controls.Add(this.Upgrade);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -129,6 +141,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button Upgrade;
     }
 }
 

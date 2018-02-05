@@ -30,13 +30,10 @@ namespace Rts_project_base
         #region Methods
         public void Upgrade()
         {
-            if(goldCount == 500)
+            if(goldCount >= 500)
             {
-                Worker worker = new Worker(position, "4", scaleFactor);
-                
+               GameWorld.gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1));
             }
-            
-                
 
         }
 

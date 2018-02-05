@@ -91,5 +91,10 @@ namespace Rts_project_base
 
             //Worker = new Worker()
         }
+
+        private void Upgrade_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
