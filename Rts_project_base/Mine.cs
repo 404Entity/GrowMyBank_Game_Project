@@ -3,39 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using System.Drawing;
+using System.Numerics;
 
 namespace Rts_project_base
 {
     class Mine : GameObject
     {
-        private bool busy = false;
-        private string name = "GoldMine";
-        private string Image = "";
-        private int coal = 1;
-        private int gold = 2; //Change value
+        #region Fields
+        private int resourceAmount;
+        public Mutex EnteranceKey;
+
+        #endregion
+
+        #region Property
 
 
+        public int ResourceAmount { get { return resourceAmount; } set { resourceAmount = value; } }
 
-
-        //key 
-        public void Busy(bool busy)
+        #endregion
+        #region Constructor
+        public Mine(Vector2 position, string spritePath, float scaleFactor) : base(position, spritePath, scaleFactor)
         {
-            if(busy == true)
-            {
 
-            }
-            else
-            {
-
-            }
         }
+        #endregion
 
-        public GoldMine(string name, bool busy, int gold)
-        {
-            this.busy = busy;
-            this.name = name;
-            this.gold = gold;
-        }
+        #region Methods
 
+
+        #endregion
     }
 }

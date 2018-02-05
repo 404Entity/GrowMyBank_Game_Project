@@ -17,10 +17,15 @@ namespace Rts_project_base
         #region Simpleton
         public static object kGameworldInstance = new object();
         private static GameWorld _instance;
-        private GameWorld()
+        public GameWorld(Graphics draws, Rectangle displayRectangle) // change to private to make Simpletom work as intended by for testing purpose leave it public 
         {
-            myDelegate = new AddListItem(AddListMethod);
+            this.backBuffer = BufferedGraphicsManager.Current.Allocate(draws, displayRectangle);
+            this.draws = backBuffer.Graphics;
+            gameObjectList = new List<GameObject>();
+            Setup();
+            Draw();
         }
+        /*
         public static GameWorld Instance
         {
             get
@@ -29,7 +34,7 @@ namespace Rts_project_base
                 {
                     lock (kGameworldInstance)
                     {
-                        
+
                         //Creates the Gameworld Instance
                         _instance = new GameWorld();
                     }
@@ -37,29 +42,30 @@ namespace Rts_project_base
                 return _instance;
             }
         }
+        */
         #endregion
 
         #region Fields
         private Graphics draws;
-        private BufferedGraphics backbuffer;
+        private BufferedGraphics backBuffer;
         private float currentFps;
         private DateTime endTime;
-        public delegate void AddListItem();
-        public AddListItem myDelegate;
+        private List<GameObject> gameObjectList;
         #endregion
         #region Properties
         #endregion
-        public void AddListMethod()
-        {
 
-        }
         private void Setup()
         {
             //intialize the componets of the gameworld
-
+            gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1));
             Form1.runGame = true;
         }
-
+        public void Draw()
+        {
+            DrawContent();
+       
+        }
         public void DrawContent()
         {
             ///<summary>
@@ -67,16 +73,19 @@ namespace Rts_project_base
             /// </summary>
             //Draw the Graphics of the Game
             draws.Clear(Color.White);
-            /*
-             foreach(GameObject drawable in gameObjectList)
-             {
-            drawable.Draw(); 
+
+            foreach (GameObject drawable in gameObjectList)
+            {
+                drawable.Draw(draws);
+                DrawUi();
+
             }
-             */
+            backBuffer.Render();
         }
         public void DrawUi()
         {
-
+            Font f = new Font("Arial", 16);
+            draws.DrawString(string.Format("FPS: {0}", currentFps), f, Brushes.Black, 550, 0);
         }
         public void Update()
         {
@@ -86,18 +95,22 @@ namespace Rts_project_base
             /*
              foreach(GameObject gO in gameObjectList)
              {
-             
+             gO.Update(Fps)
+             {
+
+             }
             }
              */
-            ///MessageBox.Show("Hello from GameWorld","oH");
+
         }
         public void Gameloop()
         {
             DateTime startime = DateTime.Now;
             TimeSpan deltaTime = startime - endTime;
             int miliSecond = deltaTime.Milliseconds > 0 ? deltaTime.Milliseconds : 1;
-            
-               
+            currentFps = 1000 / miliSecond;
+            endTime = DateTime.Now;
+            Draw();
             Update();
         }
     }
