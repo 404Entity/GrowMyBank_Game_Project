@@ -65,7 +65,7 @@ namespace Rts_project_base
         {
             //intialize the componets of the gameworld
             gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1));
-            gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1));
+            //gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1));
             
             Form1.runGame = true;
         }
@@ -97,7 +97,13 @@ namespace Rts_project_base
 
             Font counter = new Font("Arial Black", 14);
             string gold = Bank.goldCount.ToString();
-            draws.DrawString(string.Format("Gold:{0}", gold), counter, Brushes.Black, 10, 10);
+            draws.DrawString(string.Format("Gold: {0}", gold), counter, Brushes.Black, 680, 10);
+
+            string coal = Bank.coalCount.ToString();
+            draws.DrawString(string.Format("Coal: {0}", coal), counter, Brushes.Black, 800, 10);
+
+            //string gold = Bank.goldCount.ToString();
+            //draws.DrawString(string.Format("Gold:{0}", gold), counter, Brushes.Black, 700, 10);
         }
         public void Update()
         {

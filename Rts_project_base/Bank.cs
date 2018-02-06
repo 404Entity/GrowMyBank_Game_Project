@@ -13,7 +13,7 @@ namespace Rts_project_base
     class Bank : GameObject
     {
         #region Fields
-        private int coalCount;
+        public static int coalCount;
         public static int goldCount;
         #endregion
 
