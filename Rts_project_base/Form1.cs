@@ -18,13 +18,18 @@ namespace Rts_project_base
         private GameWorld gm;
         private Graphics dc;
         private Rectangle displayRectangle;
+        private GameObject destinationObject;
+        private GameObject selectedObject;
+        public static bool runGame;
         #endregion
+#region Properties
         public Graphics DC
         {
             get { return dc; }
         }
 
         internal GameObject SelectedObject { get { return selectedObject; } set { selectedObject = value; } }
+        #endregion
 
         public GameForm()
         {
@@ -36,26 +41,6 @@ namespace Rts_project_base
 
 
         }
-        private void initLoop()
-        {
-            Thread looperThread = new Thread(gamelooper);
-            looperThread.IsBackground = true;
-            looperThread.Start();
-        }
-
-        public static bool runGame = true;
-        private void gamelooper()
-        {
-            ///<remarks>CurrentThread = looperThread</remarks>
-            while (runGame)
-            {
-                //MessageBox.Show("Hello from Loop Thread");
-                //Thread.Sleep(5);
-                gm.Gameloop();
-                Cursormovement();
-            }
-        }
-
         private void Form1_Load_1(object sender, EventArgs e)
         {
             if (dc == null)
@@ -68,12 +53,23 @@ namespace Rts_project_base
             //initialize the game loop
             initLoop();
         }
-
-        private void ActiveForm_MouseClick(object sender, MouseEventArgs e)
+        private void initLoop()
         {
-            throw new NotImplementedException();
+            Thread looperThread = new Thread(gamelooper);
+            looperThread.IsBackground = true;
+            looperThread.Start();
         }
-
+        private void gamelooper()
+        {
+            ///<remarks>CurrentThread = looperThread</remarks>
+            while (runGame)
+            {
+                //MessageBox.Show("Hello from Loop Thread");
+                //Thread.Sleep(5);
+                gm.Gameloop();
+                Cursormovement();
+            }
+        }
         private void SetupUi()
         {
             button1.Text = "Show text";
@@ -84,17 +80,6 @@ namespace Rts_project_base
             Thread t1 = new Thread(HelloFromTheOhterSide);
             t1.Start();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            label1.Text = "Whaa";
-        }
-        private void HelloFromTheOhterSide()
-        {
-            //test code
-            label1.Invoke((MethodInvoker)delegate { label1.Text = "Get out off here "; });
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             //buy worker Button
@@ -103,13 +88,11 @@ namespace Rts_project_base
             gm.AddGameObject.Add(worker);
         }
 
-        public void Cursormovement()
+        private void label1_Click(object sender, EventArgs e)
         {
-            label1.Invoke((MethodInvoker)delegate { label1.Text = Cursor.Position.X.ToString(); });
-            label2.Invoke((MethodInvoker)delegate { label2.Text = Cursor.Position.Y.ToString(); });
-
+            label1.Text = "Whaa";
         }
-
+      
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -124,10 +107,24 @@ namespace Rts_project_base
         {
 
         }
-        private GameObject destinationObject;
-        private GameObject selectedObject;
+
+        private void HelloFromTheOhterSide()
+        {
+            //test code
+            label1.Invoke((MethodInvoker)delegate { label1.Text = "Get out off here "; });
+        }
+        public void Cursormovement()
+        {
+            label1.Invoke((MethodInvoker)delegate { label1.Text = Cursor.Position.X.ToString(); });
+            label2.Invoke((MethodInvoker)delegate { label2.Text = Cursor.Position.Y.ToString(); });
+
+        }
         private void GameForm_MouseClick(object sender, MouseEventArgs e)
         {
+            if (selectedObject != null)
+            {
+                label3.Invoke((MethodInvoker)delegate { label3.Text = selectedObject.ObjectName; });
+            }
             label3.Invoke((MethodInvoker)delegate { label3.Text = GameForm.MousePosition.X.ToString(); });
             label4.Invoke((MethodInvoker)delegate { label4.Text = GameForm.MousePosition.Y.ToString(); });
 
@@ -175,6 +172,7 @@ namespace Rts_project_base
                 }
             }
         }
+
         private void HandleWorker(Worker worker, float x, float y)
         {
             //Moves worker to location when no building is given
@@ -183,8 +181,10 @@ namespace Rts_project_base
             SelectedObject = null;
 
         }
+        
         private void GameForm_MouseHover(object sender, EventArgs e)
         {
+            /*
             foreach (GameObject item in gm.GameObjectList)
             {
                 if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
@@ -196,6 +196,8 @@ namespace Rts_project_base
                     item.ishovered = false;
                 }
             }
+            */
         }
+        
     }
 }

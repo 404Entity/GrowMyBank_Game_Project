@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Rts_project_base
 {
-    class GameObject
+    public abstract class GameObject
     {
         // Create a general base for all objects game.
         #region Fields
