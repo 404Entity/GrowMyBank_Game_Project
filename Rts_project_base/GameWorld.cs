@@ -74,16 +74,17 @@ namespace Rts_project_base
             ///Draws the games ui
             /// </summary>
             //Draw the Graphics of the Game
-            draws.Clear(Color.White);
+            draws.Clear(Color.Blue);
+            lvlgen.LoadWorld(draws);
             foreach (GameObject drawable in gameObjectList)
             {
                 drawable.Draw(draws);
                 DrawUi();
-                lvlgen.LoadWorld(draws);
+                
             }
             backBuffer.Render();
 
-            
+
         }
         public void DrawUi()
         {

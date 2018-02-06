@@ -20,7 +20,7 @@ namespace Rts_project_base
         #region Property
 
 
-        public int ResourceAmount { get { return resourceAmount; } set { resourceAmount = value; } }
+        public int ResourceAmount { get { return resourceAmount; } set { resourceAmount -= value; } }
 
         #endregion
         #region Constructor

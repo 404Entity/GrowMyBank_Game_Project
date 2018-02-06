@@ -14,7 +14,7 @@ namespace Rts_project_base
 {
     public partial class Form1 : Form
     {
-#region Fields
+        #region Fields
         private GameWorld gm;
         private Graphics dc;
         private Rectangle displayRectangle = new Rectangle(0,0,960,540);
