@@ -17,7 +17,7 @@ namespace Rts_project_base
         #region Fields
         private GameWorld gm;
         private Graphics dc;
-        private Rectangle displayRectangle = new Rectangle(0,0,960,540);
+        private Rectangle displayRectangle = new Rectangle(0,0,800,600);
         #endregion
         public Graphics DC
         {

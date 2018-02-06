@@ -51,7 +51,7 @@ namespace Rts_project_base
         private float currentFps;
         private DateTime endTime;
         private static List<GameObject> gameObjectList;
-        LevelGenerator lvlgen = new LevelGenerator();
+       
 
         #endregion
         #region Properties
@@ -74,8 +74,8 @@ namespace Rts_project_base
             ///Draws the games ui
             /// </summary>
             //Draw the Graphics of the Game
-            draws.Clear(Color.Blue);
-            lvlgen.LoadWorld(draws);
+            draws.Clear(Color.White);
+            LevelGenerator gen = new LevelGenerator(draws);
             foreach (GameObject drawable in gameObjectList)
             {
                 drawable.Draw(draws);
