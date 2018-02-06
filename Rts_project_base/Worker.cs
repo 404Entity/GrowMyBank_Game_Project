@@ -46,7 +46,11 @@ namespace Rts_project_base
             Thread.Sleep(3000);//simulates the worker mining
             carryingResource = true;
         }
-
+        public void MoveTo(float x, float y)
+        {
+            position.X = x;
+            position.Y = y;
+        }
         #endregion
 
     }

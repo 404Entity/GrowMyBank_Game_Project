@@ -14,7 +14,7 @@ namespace Rts_project_base
 {
     public partial class GameForm : Form
     {
-#region Fields
+        #region Fields
         private GameWorld gm;
         private Graphics dc;
         private Rectangle displayRectangle;
@@ -24,16 +24,16 @@ namespace Rts_project_base
             get { return dc; }
         }
 
-        internal GameObject SelectedObject { get => selectedObject; set => selectedObject = value; }
+        internal GameObject SelectedObject { get { return selectedObject; } set { selectedObject = value; } }
 
         public GameForm()
         {
             InitializeComponent();
             //initialize a new thread to run the Gameloop
-    
+
             //initialize the Gameworld
-            displayRectangle = new Rectangle(0, 0, 1300, 900); 
-          
+            displayRectangle = new Rectangle(0, 0, 1300, 900);
+
 
         }
         private void initLoop()
@@ -55,7 +55,7 @@ namespace Rts_project_base
                 Cursormovement();
             }
         }
-        
+
         private void Form1_Load_1(object sender, EventArgs e)
         {
             if (dc == null)
@@ -92,14 +92,15 @@ namespace Rts_project_base
         private void HelloFromTheOhterSide()
         {
             //test code
-            label1.Invoke((MethodInvoker)delegate{ label1.Text = "Get out off here "; });
+            label1.Invoke((MethodInvoker)delegate { label1.Text = "Get out off here "; });
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             //buy worker Button
-            gm.
-            Worker = new Worker()
+
+            Worker worker = (new Worker(new System.Numerics.Vector2(300, 200), @"C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\Images\worker_test..png", 0.2f, "john"));
+            gm.AddGameObject.Add(worker);
         }
 
         public void Cursormovement()
@@ -123,30 +124,65 @@ namespace Rts_project_base
         {
 
         }
-
-        private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
-        {
-
-        }
+        private GameObject destinationObject;
         private GameObject selectedObject;
         private void GameForm_MouseClick(object sender, MouseEventArgs e)
         {
             label3.Invoke((MethodInvoker)delegate { label3.Text = GameForm.MousePosition.X.ToString(); });
             label4.Invoke((MethodInvoker)delegate { label4.Text = GameForm.MousePosition.Y.ToString(); });
-            
+
             string showString = "X" + Cursor.Position.X + " : " + "Y" + Cursor.Position.Y;
             //MessageBox.Show(showString);
-            
+            // If a worker is selected check if the new mouse click is on a building.
+            if (selectedObject != null)
+            {
+                if (selectedObject is Worker)
+                {
+                    foreach (GameObject item in gm.GameObjectList)
+                    {
+                        if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
+                        {
+                            if (item is Mine || item is Bank)
+                            {
+                                destinationObject = item;
+                                MessageBox.Show(selectedObject.ObjectName + " go to" + destinationObject.ObjectName);
+                            }
+
+                        }
+                        else if (item is Worker)
+                        {
+
+                        }
+                        {
+                            HandleWorker(selectedObject as Worker, Cursor.Position.X, Cursor.Position.Y);
+                            break;
+                        }
+                    }
+                }
+            }
             foreach (GameObject item in gm.GameObjectList)
             {
-                if (item.CheckCords(Cursor.Position.X,Cursor.Position.Y))
+                if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
                 {
-                    selectedObject = item;
-                    MessageBox.Show(selectedObject.ObjectName);
+                    if (item is Worker)
+                    {
+
+                        selectedObject = item;
+                        //MessageBox.Show(selectedObject.ObjectName);
+                    }
+
+
                 }
             }
         }
+        private void HandleWorker(Worker worker, float x, float y)
+        {
+            //Moves worker to location when no building is given
+            worker.MoveTo(x, y);
+            //bugged
+            SelectedObject = null;
 
+        }
         private void GameForm_MouseHover(object sender, EventArgs e)
         {
             foreach (GameObject item in gm.GameObjectList)

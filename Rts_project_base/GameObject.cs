@@ -12,7 +12,7 @@ namespace Rts_project_base
 {
     class GameObject
     {
-// Create a general base for all objects game.
+        // Create a general base for all objects game.
         #region Fields
         protected Image sprite;
         protected Vector2 position;
@@ -52,7 +52,7 @@ namespace Rts_project_base
             this.sprite = this.animationFrames[0];
         }
 
-        public  RectangleF CollisionBox
+        public RectangleF CollisionBox
         {
             get
             {
@@ -69,9 +69,9 @@ namespace Rts_project_base
 #if DEBUG
             if (ishovered)
             {
-                dc.DrawRectangle(new Pen(Brushes.Yellow, 2), position.X, position.Y, sprite.Width, sprite.Height);
+                dc.DrawRectangle(new Pen(Brushes.Yellow, 2), position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
             }
-            dc.DrawRectangle(new Pen(Brushes.Green), position.X, position.Y, sprite.Width, sprite.Height);
+            dc.DrawRectangle(new Pen(Brushes.Green), position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
 #endif
         }
         public bool ishovered;
@@ -85,7 +85,7 @@ namespace Rts_project_base
             originPoint.Y = position.Y + (sprite.Height / 2);
         }
         #endregion
-        public bool CheckCords(float x,float y)
+        public bool CheckCords(float x, float y)
         {
             if (CollisionBox.Contains(x, y))
             {

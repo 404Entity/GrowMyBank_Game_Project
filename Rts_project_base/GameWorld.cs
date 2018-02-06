@@ -24,6 +24,8 @@ namespace Rts_project_base
             this.displayRect = displayRectangle;
             unitRect = new RectangleF(0,0,(displayRect.Width/50),(displayRect.Height/50));
             gameObjectList = new List<GameObject>();
+            addGameObject = new List<GameObject>();
+            removeGameObject = new List<GameObject>();
             Setup();
             Draw();
         }
@@ -54,6 +56,9 @@ namespace Rts_project_base
         private float currentFps;
         private DateTime endTime;
         private List<GameObject> gameObjectList;
+        private static Mutex gameListKey= new Mutex();
+        private List<GameObject> addGameObject;
+        private List<GameObject> removeGameObject;
         #endregion
         #region Properties
         public List<GameObject> GameObjectList
@@ -63,13 +68,13 @@ namespace Rts_project_base
         }
         public List<GameObject> AddGameObject
         {
-            get { return AddGameObject; }
-            set { AddGameObject = value; }
+            get { return addGameObject; }
+            set { addGameObject = value; }
         }
         public List<GameObject> RemoveGameObject
         {
-            get { return RemoveGameObject; }
-            set { RemoveGameObject = value; }
+            get { return removeGameObject; }
+            set { removeGameObject = value; }
         }
         #endregion
 
@@ -93,13 +98,14 @@ namespace Rts_project_base
             /// </summary>
             //Draw the Graphics of the Game
             draws.Clear(Color.White);
-
+            gameListKey.WaitOne();
             foreach (GameObject drawable in gameObjectList)
             {
                 drawable.Draw(draws);
                 DrawUi();
                 
             }
+            gameListKey.ReleaseMutex();
             // Test DrawGrid 
             /* 
             RectangleF testRect = unitRect;
@@ -148,7 +154,17 @@ namespace Rts_project_base
              }
             }
              */
-
+            foreach (GameObject item in AddGameObject)
+            {
+                gameListKey.WaitOne();
+                gameObjectList.Add(item);
+                gameListKey.ReleaseMutex();
+            }
+            ClearTempLists();
+        }
+        private void ClearTempLists()
+        {
+            AddGameObject.Clear();
         }
         public void Gameloop()
         {
