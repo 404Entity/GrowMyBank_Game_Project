@@ -81,14 +81,16 @@ namespace Rts_project_base
             /// </summary>
             //Draw the Graphics of the Game
             draws.Clear(Color.White);
-
+            LevelGenerator gen = new LevelGenerator(draws);
             foreach (GameObject drawable in gameObjectList)
             {
                 drawable.Draw(draws);
                 DrawUi();
-
+                
             }
             backBuffer.Render();
+
+
         }
         public void DrawUi()
         {
