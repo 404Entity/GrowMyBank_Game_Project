@@ -85,7 +85,7 @@ namespace Rts_project_base
         {
             //buy worker Button
 
-            Worker worker = (new Worker(new System.Numerics.Vector2(300, 200), @"C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\Images\worker_test..png", 0.2f, "john"));
+            Worker worker = (new Worker(new System.Numerics.Vector2(300, 200), @"Images\worker_test..png", 0.2f, "john"));
             GameWorld.AddGameObject.Add(worker);
             
         }
