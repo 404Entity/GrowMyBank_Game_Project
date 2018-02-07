@@ -138,7 +138,17 @@ namespace Rts_project_base
         {
             Font f = new Font("Arial", 16);
             draws.DrawString(string.Format("FPS: {0}", currentFps), f, Brushes.Black, 550, 0);
-            
+
+            Font counter = new Font("Arial Black", 14);
+            string gold = Bank.goldCount.ToString();
+            draws.DrawString(string.Format("Gold: {0}", gold), counter, Brushes.Black, 680, 10);
+
+            string coal = Bank.coalCount.ToString();
+            draws.DrawString(string.Format("Coal: {0}", coal), counter, Brushes.Black, 800, 10);
+
+            //string gold = Bank.goldCount.ToString();
+            //draws.DrawString(string.Format("Gold:{0}", gold), counter, Brushes.Black, 700, 10);
+
         }
         public void Update()
         {

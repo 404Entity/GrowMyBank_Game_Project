@@ -218,6 +218,37 @@ namespace Rts_project_base
             }
             */
         }
-        
+
+
+
+
+
+        //!!!!!!!!!!!!Upgrade click metode Johannes!!!!!!!!!
+        /*
+
+        private void Upgrade_Click(object sender, EventArgs e)
+        {
+            if (Bank.goldCount >= 500)
+            {
+                Upgrade.Visible = true;
+                GameWorld.gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1, "john"));
+                Worker.workerAmount = 3;
+                upgradeTwo = true;
+
+                if (upgradeTwo = true && Bank.goldCount >= 750)
+                {
+                    Upgrade.Visible = true;
+                    Thread.Sleep(2000);
+                }
+            }
+
+            else
+            {
+                Upgrade.Visible = false;
+            }
+            Upgrade.Visible = false;
+        }
+        */
+
     }
 }
