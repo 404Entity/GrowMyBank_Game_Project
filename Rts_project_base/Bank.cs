@@ -8,11 +8,13 @@ using System.Numerics;
 
 namespace Rts_project_base
 {
+     
+
     class Bank : GameObject
     {
         #region Fields
-        private int coalCount;
-        private int goldCount;
+        public static int coalCount;
+        public static int goldCount;
         #endregion
 
         #region Property
@@ -26,10 +28,7 @@ namespace Rts_project_base
         }
         #endregion
         #region Methods
-        public void Upgrade()
-        {
 
-        }
 
         #endregion
     }

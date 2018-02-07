@@ -9,32 +9,31 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Reflection;
+using System.Numerics;
 
 namespace Rts_project_base
 {
-    public partial class GameForm : Form
+    public partial class Form1 : Form
     {
 #region Fields
         private GameWorld gm;
         private Graphics dc;
-        private Rectangle displayRectangle;
+        private Rectangle displayRectangle = new Rectangle(0,0,960,540);
+        private static bool upgradeTwo = false;
         #endregion
         public Graphics DC
         {
             get { return dc; }
         }
-
-        internal GameObject SelectedObject { get => selectedObject; set => selectedObject = value; }
-
-        public GameForm()
+        public Form1()
         {
+            
             InitializeComponent();
             //initialize a new thread to run the Gameloop
-    
+ 
             //initialize the Gameworld
-            displayRectangle = new Rectangle(0, 0, 1300, 900); 
-          
-
+            
+            
         }
         private void initLoop()
         {
@@ -52,28 +51,21 @@ namespace Rts_project_base
                 //MessageBox.Show("Hello from Loop Thread");
                 //Thread.Sleep(5);
                 gm.Gameloop();
-                Cursormovement();
             }
         }
         
         private void Form1_Load_1(object sender, EventArgs e)
         {
+
             if (dc == null)
             {
                 dc = CreateGraphics();
             }
             //gm = GameWorld.Instance;
-            SetupUi();
             gm = new GameWorld(CreateGraphics(), displayRectangle);
             //initialize the game loop
             initLoop();
         }
-
-        private void ActiveForm_MouseClick(object sender, MouseEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void SetupUi()
         {
             button1.Text = "Show text";
@@ -102,64 +94,27 @@ namespace Rts_project_base
             //Worker = new Worker()
         }
 
-        public void Cursormovement()
+        private void Upgrade_Click(object sender, EventArgs e)
         {
-            label1.Invoke((MethodInvoker)delegate { label1.Text = Cursor.Position.X.ToString(); });
-            label2.Invoke((MethodInvoker)delegate { label2.Text = Cursor.Position.Y.ToString(); });
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void eventLog1_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
-        {
-
-        }
-        private GameObject selectedObject;
-        private void GameForm_MouseClick(object sender, MouseEventArgs e)
-        {
-            label3.Invoke((MethodInvoker)delegate { label3.Text = GameForm.MousePosition.X.ToString(); });
-            label4.Invoke((MethodInvoker)delegate { label4.Text = GameForm.MousePosition.Y.ToString(); });
-            
-            string showString = "X" + Cursor.Position.X + " : " + "Y" + Cursor.Position.Y;
-            //MessageBox.Show(showString);
-            
-            foreach (GameObject item in gm.GameObjectList)
+            if(Bank.goldCount >= 500)
             {
-                if (item.CheckCords(Cursor.Position.X,Cursor.Position.Y))
+                Upgrade.Visible = true;
+                GameWorld.gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1));
+                Worker.workerAmount = 3;
+                upgradeTwo = true; 
+
+                if(upgradeTwo = true && Bank.goldCount >= 750)
                 {
-                    selectedObject = item;
-                    MessageBox.Show(selectedObject.ObjectName);
+                    Upgrade.Visible = true;
+                    Thread.Sleep(2000);
                 }
             }
-        }
-
-        private void GameForm_MouseHover(object sender, EventArgs e)
-        {
-            foreach (GameObject item in gm.GameObjectList)
+            
+            else
             {
-                if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
-                {
-                    item.ishovered = true;
-                }
-                else
-                {
-                    item.ishovered = false;
-                }
+                Upgrade.Visible = false;
             }
+            Upgrade.Visible = false;
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Rts_project_base
         private float speed;
         private bool working;
         private bool carryingResource;
+        public static int workerAmount = 2;
         #endregion
         #region Property
        
