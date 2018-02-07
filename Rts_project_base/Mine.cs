@@ -13,7 +13,7 @@ namespace Rts_project_base
     {
         #region Fields
         private int resourceAmount;
-        public Mutex EnteranceKey;
+        public Semaphore EnteranceKey;
 
         #endregion
 
@@ -26,7 +26,8 @@ namespace Rts_project_base
         #region Constructor
         public Mine(Vector2 position, string spritePath, float scaleFactor, string name) : base(position, spritePath, scaleFactor, name)
         {
-
+            // define Semaphore
+            EnteranceKey = new Semaphore(1, 1);
         }
         #endregion
 

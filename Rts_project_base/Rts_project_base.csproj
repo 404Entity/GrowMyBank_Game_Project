@@ -100,7 +100,7 @@
     <Content Include="Images\Mine_Test1..png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Tree.jpg">
+    <Content Include="Images\worker_test..png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

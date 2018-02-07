@@ -36,6 +36,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.Upgrade = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -53,7 +55,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(408, 515);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(51, 20);
+            this.label1.Size = new System.Drawing.Size(46, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -118,7 +120,45 @@
             this.Upgrade.Visible = false;
             this.Upgrade.Click += new System.EventHandler(this.Upgrade_Click);
             // 
-            // Form1
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(227, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 17);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "label3";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(279, 18);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(46, 17);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "label4";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // eventLog1
+            // 
+            this.eventLog1.SynchronizingObject = this;
+            this.eventLog1.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(this.eventLog1_EntryWritten);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Location = new System.Drawing.Point(290, 552);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(331, 50);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -131,6 +171,9 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load_1);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.eventLog1)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -23,6 +23,8 @@ namespace Rts_project_base
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(draws, displayRectangle);
             this.draws = backBuffer.Graphics;
             gameObjectList = new List<GameObject>();
+            addGameObject = new List<GameObject>();
+            removeGameObject = new List<GameObject>();
             Setup();
             Draw();
         }
@@ -51,13 +53,26 @@ namespace Rts_project_base
         private BufferedGraphics backBuffer;
         private float currentFps;
         private DateTime endTime;
-        public static List<GameObject> gameObjectList;
+        private List<GameObject> gameObjectList;
+        private static Mutex gameListKey= new Mutex();
+        private static List<GameObject> addGameObject;
+        private static List<GameObject> removeGameObject;
         #endregion
         #region Properties
         public List<GameObject> GameObjectList
         {
             get { return gameObjectList; }
             set { gameObjectList = value; }
+        }
+        public  static List<GameObject> AddGameObject
+        {
+            get { return addGameObject; }
+            set { addGameObject = value; }
+        }
+        public static List<GameObject> RemoveGameObject
+        {
+            get { return removeGameObject; }
+            set { removeGameObject = value; }
         }
         #endregion
 
@@ -82,13 +97,32 @@ namespace Rts_project_base
             //Draw the Graphics of the Game
             draws.Clear(Color.White);
             LevelGenerator gen = new LevelGenerator(draws);
+            gameListKey.WaitOne();
             foreach (GameObject drawable in gameObjectList)
             {
                 drawable.Draw(draws);
                 DrawUi();
                 
             }
-            backBuffer.Render();
+            // Test DrawGrid 
+            /* 
+            RectangleF testRect = unitRect;
+            for (int i = 0; i < 50; i++)
+            {
+                if (i != 0)
+                {
+                    testRect.Y += testRect.Height;
+                }
+                testRect.X = unitRect.X;
+                for (int j = 0; j < 50; j++)
+                { 
+                    RectangleF instanceRect = testRect;
+                    if (j < 1)
+                    {
+                        draws.DrawRectangle(new Pen(Brushes.Red), instanceRect.X, instanceRect.Y, instanceRect.Width, instanceRect.Height);
+                    }
+                    else
+                    {
 
 
         }
@@ -121,7 +155,24 @@ namespace Rts_project_base
              }
             }
              */
-
+            foreach (GameObject item in AddGameObject)
+            {
+                gameListKey.WaitOne();
+                gameObjectList.Add(item);
+                gameListKey.ReleaseMutex();
+            }
+            foreach (GameObject item in RemoveGameObject)
+            {
+                gameListKey.WaitOne();
+                GameObjectList.Remove(item);
+                gameListKey.ReleaseMutex();
+            }
+            ClearTempLists();
+        }
+        private void ClearTempLists()
+        {
+            RemoveGameObject.Clear();
+            AddGameObject.Clear();
         }
         public void Gameloop()
         {
