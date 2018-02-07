@@ -46,7 +46,6 @@ namespace Rts_project_base
             Thread.Sleep(3000);//simulates the worker mining
             carryingResource = true;
         }
-
         #endregion
 
     }

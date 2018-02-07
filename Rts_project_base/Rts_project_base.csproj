@@ -55,23 +55,23 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bank.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="Morten_Bank.cs" />
+    <Compile Include="Morten_Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Morten_Form1.Designer.cs">
+      <DependentUpon>Morten_Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameObject.cs" />
-    <Compile Include="GameWorld.cs" />
+    <Compile Include="Morten_GameObject.cs" />
+    <Compile Include="Morten_GameWorld.cs" />
     <Compile Include="Keyboard.cs" />
-    <Compile Include="LevelGenerator.cs" />
-    <Compile Include="Mine.cs" />
+    <Compile Include="Morten_LevelGenerator.cs" />
+    <Compile Include="Morten_Mine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Worker.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Morten_Worker.cs" />
+    <EmbeddedResource Include="Morten_Form1.resx">
+      <DependentUpon>Morten_Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
