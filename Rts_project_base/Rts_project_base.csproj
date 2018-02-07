@@ -97,6 +97,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Bank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Mine_Test1..png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
