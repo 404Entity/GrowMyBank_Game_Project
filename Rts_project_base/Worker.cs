@@ -61,6 +61,7 @@ namespace Rts_project_base
             Thread WorkerThread = new Thread(Work);
             //starts the thread
             WorkerThread.Start();
+            WorkerThread.IsBackground = true;
             //sets the state of the worker to be active
             active = true;
         }
