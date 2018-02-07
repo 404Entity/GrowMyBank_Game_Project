@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Reflection;
+using System.Numerics;
 
 namespace Rts_project_base
 {
@@ -182,6 +183,7 @@ namespace Rts_project_base
 
                 }
             }
+            Worker.onClickMoveToPosition = new Vector2(Cursor.Position.X, Cursor.Position.Y);
         }
 
         private void HandleWorker(Worker worker)

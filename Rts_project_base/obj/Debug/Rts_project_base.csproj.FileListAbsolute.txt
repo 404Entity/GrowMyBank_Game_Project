@@ -32,3 +32,4 @@ C:\Users\MIKZ\source\repos\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rt
 C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Images\Mine_Test1..png
 C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Images\worker_test..png
 C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.GameForm.resources
+C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Images\Bank.png

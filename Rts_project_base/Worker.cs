@@ -20,9 +20,10 @@ namespace Rts_project_base
         private bool moving;
         Vector2 destination;
         Mine currentMine;
+        public static Vector2 onClickMoveToPosition;
         #endregion
         #region Property
-       
+
         public float Speed { get { return speed; } set { speed = value; } }
         public bool Working
         {
@@ -76,13 +77,12 @@ namespace Rts_project_base
                 }
                 if (working)
                 {
-                    MoveTo(destination.X, destination.Y);
                     Mine();
                     working = false;
                 }
                 else if (moving)
                 {
-                    MoveTo(destination.X, destination.Y);
+                    MoveToPosition();
                     moving = false;
                 }
             }
@@ -98,10 +98,13 @@ namespace Rts_project_base
             // releaser key so ohter members ca acces the mine
             currentMine.EnteranceKey.Release();
         }
-        public void MoveTo(float x, float y)
+        //Mangler parameter (float fps)
+        public void MoveToPosition()
         {
-            position.X = x;
-            position.Y = y;
+            Vector2 velosity = Vector2.Normalize(onClickMoveToPosition - this.position);
+
+            this.position.X += 1 * (velosity.X * speed);
+            this.position.Y += 1 * (velosity.Y * speed);
         }
         #endregion
 
