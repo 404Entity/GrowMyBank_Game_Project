@@ -57,8 +57,8 @@ namespace Rts_project_base
         private DateTime endTime;
         private List<GameObject> gameObjectList;
         private static Mutex gameListKey= new Mutex();
-        private List<GameObject> addGameObject;
-        private List<GameObject> removeGameObject;
+        private static List<GameObject> addGameObject;
+        private static List<GameObject> removeGameObject;
         #endregion
         #region Properties
         public List<GameObject> GameObjectList
@@ -66,12 +66,12 @@ namespace Rts_project_base
             get { return gameObjectList; }
             set { gameObjectList = value; }
         }
-        public List<GameObject> AddGameObject
+        public  static List<GameObject> AddGameObject
         {
             get { return addGameObject; }
             set { addGameObject = value; }
         }
-        public List<GameObject> RemoveGameObject
+        public static List<GameObject> RemoveGameObject
         {
             get { return removeGameObject; }
             set { removeGameObject = value; }
@@ -160,10 +160,17 @@ namespace Rts_project_base
                 gameObjectList.Add(item);
                 gameListKey.ReleaseMutex();
             }
+            foreach (GameObject item in RemoveGameObject)
+            {
+                gameListKey.WaitOne();
+                GameObjectList.Remove(item);
+                gameListKey.ReleaseMutex();
+            }
             ClearTempLists();
         }
         private void ClearTempLists()
         {
+            RemoveGameObject.Clear();
             AddGameObject.Clear();
         }
         public void Gameloop()

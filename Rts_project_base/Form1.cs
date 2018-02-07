@@ -19,6 +19,7 @@ namespace Rts_project_base
         private Graphics dc;
         private Rectangle displayRectangle;
         private GameObject destinationObject;
+        private GameObject selectedWorker;
         private GameObject selectedObject;
         public static bool runGame;
         #endregion
@@ -28,7 +29,7 @@ namespace Rts_project_base
             get { return dc; }
         }
 
-        internal GameObject SelectedObject { get { return selectedObject; } set { selectedObject = value; } }
+        internal GameObject SelectedObject { get { return selectedWorker; } set { selectedWorker = value; } }
         #endregion
 
         public GameForm()
@@ -85,7 +86,8 @@ namespace Rts_project_base
             //buy worker Button
 
             Worker worker = (new Worker(new System.Numerics.Vector2(300, 200), @"C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\Images\worker_test..png", 0.2f, "john"));
-            gm.AddGameObject.Add(worker);
+            GameWorld.AddGameObject.Add(worker);
+            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -121,19 +123,23 @@ namespace Rts_project_base
         }
         private void GameForm_MouseClick(object sender, MouseEventArgs e)
         {
-            if (selectedObject != null)
+            if (selectedWorker != null)
             {
-                label3.Invoke((MethodInvoker)delegate { label3.Text = selectedObject.ObjectName; });
+                label3.Invoke((MethodInvoker)delegate { label3.Text = selectedWorker.ObjectName; });
             }
-            label3.Invoke((MethodInvoker)delegate { label3.Text = GameForm.MousePosition.X.ToString(); });
+            else
+            {
+                label3.Invoke((MethodInvoker)delegate { label3.Text = GameForm.MousePosition.X.ToString(); });
+            }
+
             label4.Invoke((MethodInvoker)delegate { label4.Text = GameForm.MousePosition.Y.ToString(); });
 
             string showString = "X" + Cursor.Position.X + " : " + "Y" + Cursor.Position.Y;
             //MessageBox.Show(showString);
             // If a worker is selected check if the new mouse click is on a building.
-            if (selectedObject != null)
+            if (selectedWorker != null)
             {
-                if (selectedObject is Worker)
+                if (selectedWorker is Worker)
                 {
                     foreach (GameObject item in gm.GameObjectList)
                     {
@@ -142,16 +148,19 @@ namespace Rts_project_base
                             if (item is Mine || item is Bank)
                             {
                                 destinationObject = item;
-                                MessageBox.Show(selectedObject.ObjectName + " go to" + destinationObject.ObjectName);
+                                HandleWorker(selectedWorker as Worker);
+                                // MessageBox.Show(selectedWorker.ObjectName + " go to" + destinationObject.ObjectName);
+                                break;
                             }
 
                         }
                         else if (item is Worker)
                         {
-
+                            break;
                         }
+                        else
                         {
-                            HandleWorker(selectedObject as Worker, Cursor.Position.X, Cursor.Position.Y);
+                            HandleWorker(selectedWorker as Worker, Cursor.Position.X, Cursor.Position.Y);
                             break;
                         }
                     }
@@ -163,20 +172,31 @@ namespace Rts_project_base
                 {
                     if (item is Worker)
                     {
-
-                        selectedObject = item;
+                        selectedWorker = item;
                         //MessageBox.Show(selectedObject.ObjectName);
                     }
-
+                    else
+                    {
+                        selectedObject = item;
+                    }
 
                 }
             }
         }
 
+        private void HandleWorker(Worker worker)
+        {
+            worker.CurrentBuilding = destinationObject as Mine;
+            worker.Working = true;
+            worker.Destination = new System.Numerics.Vector2(destinationObject.Position.X, destinationObject.Position.Y);
+            selectedWorker = null;
+            destinationObject = null;
+        }
         private void HandleWorker(Worker worker, float x, float y)
         {
             //Moves worker to location when no building is given
-            worker.MoveTo(x, y);
+            worker.Destination = new System.Numerics.Vector2(x, y);
+            worker.Moving = true;
             //bugged
             SelectedObject = null;
 
