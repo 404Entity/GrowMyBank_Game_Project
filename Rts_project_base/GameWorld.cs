@@ -64,7 +64,7 @@ namespace Rts_project_base
         private void Setup()
         {
             //intialize the componets of the gameworld
-            gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1));
+            gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1,"Goldmine"));
             //gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1));
             
             Form1.runGame = true;

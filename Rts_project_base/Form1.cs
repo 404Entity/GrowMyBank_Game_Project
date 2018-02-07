@@ -99,7 +99,7 @@ namespace Rts_project_base
             if(Bank.goldCount >= 500)
             {
                 Upgrade.Visible = true;
-                GameWorld.gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1));
+                GameWorld.gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1,"john"));
                 Worker.workerAmount = 3;
                 upgradeTwo = true; 
 
