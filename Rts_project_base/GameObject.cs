@@ -21,6 +21,7 @@ namespace Rts_project_base
         protected List<Image> animationFrames;
         private string objectName;
         private RectangleF collisionBox;
+        protected float currentFPS;
         #endregion
 
         #region Property
@@ -28,6 +29,11 @@ namespace Rts_project_base
         {
             get { return position; }
             set { position = value; }
+        }
+        public Vector2 OriginPoint
+        {
+            get { return originPoint; }
+            set { originPoint = value; }
         }
         public string ObjectName
         {
@@ -56,7 +62,7 @@ public RectangleF CollisionBox
             string[] Imagepaths = spritePath.Split(';');
             this.objectName = name;
             this.animationFrames = new List<Image>();
-
+            //in case of animation strips add the images to a list.
             foreach (string path in Imagepaths)
             {
                 Image img = Image.FromFile(path);
@@ -64,6 +70,7 @@ public RectangleF CollisionBox
             }
 
             this.sprite = this.animationFrames[0];
+            // define the collisionBox
             collisionBox = new RectangleF(position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
         }
 
@@ -73,15 +80,13 @@ public RectangleF CollisionBox
         #region Methods
         public virtual void Draw(Graphics dc)
         {
+            //Draws the sprite
             dc.DrawImage(sprite, position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
 #if DEBUG
-            if (ishovered)
-            {
-                dc.DrawRectangle(new Pen(Brushes.Yellow, 2), position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
-            }
             dc.DrawRectangle(new Pen(Brushes.Green), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height );
 #endif
         }
+        // hmm probaly an unecesary feature
         public bool ishovered;
         public void UpdateColisionBox()
         {
@@ -90,18 +95,20 @@ public RectangleF CollisionBox
         }
         public virtual void Update(float fps)
         {
-
+            // Gets the center of an object
             CalcCenterPoint();
+            //Update the CollisionBox of dynamic object. this should properly be in the worker class insted.
             UpdateColisionBox();
+            currentFPS = fps;
         }
         public void CalcCenterPoint()
         {
             originPoint.X = position.X + (sprite.Width / 2);
             originPoint.Y = position.Y + (sprite.Height / 2);
         }
-        #endregion
         public bool CheckCords(float x, float y)
         {
+            //check if a object is clicked on by a mouse 
             if (CollisionBox.Contains(x, y))
             {
                 return true;
@@ -109,6 +116,8 @@ public RectangleF CollisionBox
             return false;
             //return CollisionBox.Contains(x, y);
         }
+        #endregion
+
     }
 }
 

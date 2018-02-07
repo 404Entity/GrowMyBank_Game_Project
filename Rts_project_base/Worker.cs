@@ -20,7 +20,8 @@ namespace Rts_project_base
         private bool moving;
         Vector2 destination;
         Mine currentMine;
-        public static Vector2 onClickMoveToPosition;
+        // argh plz stop this.
+        //public static Vector2 onClickMoveToPosition;
         #endregion
         #region Property
 
@@ -52,6 +53,7 @@ namespace Rts_project_base
         {
             //starts the workers thread
             InitWorkerThread();
+            speed = 1;
         }
         #endregion
         #region Methods
@@ -73,17 +75,30 @@ namespace Rts_project_base
             {
                 if (carryingResource)
                 {
-
+                    DepositResource();
+                    carryingResource = false;
                 }
                 if (working)
                 {
-                    Mine();
-                    working = false;
+                    //MoveToPosition(currentFPS, destination);
+                    if (position != destination)
+                    {
+                        Mine();
+                        currentMine = null;
+                    
+                        working = false;
+                    }
+              
+
                 }
                 else if (moving)
                 {
-                    MoveToPosition();
-                    moving = false;
+                    MoveToPosition(currentFPS, destination);
+                    if (position == destination)
+                    {
+                        moving = false;
+                    }
+
                 }
             }
         }   
@@ -94,17 +109,28 @@ namespace Rts_project_base
             GameWorld.RemoveGameObject.Add(this);
             Thread.Sleep(3000);//simulates the worker mining
             carryingResource = true;
+            position.X = currentMine.OriginPoint.X;
+            position.Y = currentMine.OriginPoint.Y + (currentMine.OriginPoint.Y - currentMine.Position.Y); 
             GameWorld.AddGameObject.Add(this);
             // releaser key so ohter members ca acces the mine
+
             currentMine.EnteranceKey.Release();
         }
-        //Mangler parameter (float fps)
-        public void MoveToPosition()
+        //Mangler parameter (float fps) //Fixed
+        public void MoveToPosition(float fps, Vector2 deposition)
         {
-            Vector2 velosity = Vector2.Normalize(onClickMoveToPosition - this.position);
+   
+            Vector2 velosity = Vector2.Normalize(deposition - this.position);
 
-            this.position.X += 1 * (velosity.X * speed);
-            this.position.Y += 1 * (velosity.Y * speed);
+            {
+                    this.position.X += (1 * (velosity.X * speed)) / (fps * 120);
+                    this.position.Y += (1 * (velosity.Y * speed)) / (fps * 120);
+            }
+
+        }
+        public void DepositResource()
+        {
+            Bank.GoldCount += 300;
         }
         #endregion
 
