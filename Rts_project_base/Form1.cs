@@ -102,25 +102,19 @@ namespace Rts_project_base
 
         private void Upgrade_Click(object sender, EventArgs e)
         {
-            if(Bank.goldCount >= 500)
+            if (Bank.goldCount >= 500)
             {
                 Upgrade.Visible = true;
-                GameWorld.gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1,"john"));
+                GameWorld.gameObjectList.Add(new Worker(new Vector2(10, 10), @"imagehere", 1, "john"));
                 Worker.workerAmount = 3;
-                upgradeTwo = true; 
+                upgradeTwo = true;
 
+                if (upgradeTwo = true && Bank.goldCount >= 750)
+                {
+                    Thread.Sleep(2000);
+                }
+            }
         }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void HelloFromTheOhterSide()
         {
             //test code
@@ -215,7 +209,7 @@ namespace Rts_project_base
         
         private void GameForm_MouseHover(object sender, EventArgs e)
         {
-            /*
+            
             foreach (GameObject item in gm.GameObjectList)
             {
                 if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
@@ -226,18 +220,7 @@ namespace Rts_project_base
                 {
                     item.ishovered = false;
                 }
-                if(upgradeTwo = true && Bank.goldCount >= 750)
-                {
-                    Upgrade.Visible = true;
-                    Thread.Sleep(2000);
-                }
-            }
             
-            else
-            {
-                Upgrade.Visible = false;
-            }
-            Upgrade.Visible = false;
         }
         
     }
