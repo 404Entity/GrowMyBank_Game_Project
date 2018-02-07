@@ -201,23 +201,6 @@ namespace Rts_project_base
             SelectedObject = null;
 
         }
-        
-        private void GameForm_MouseHover(object sender, EventArgs e)
-        {
-            /*
-            foreach (GameObject item in gm.GameObjectList)
-            {
-                if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
-                {
-                    item.ishovered = true;
-                }
-                else
-                {
-                    item.ishovered = false;
-                }
-            }
-            */
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {

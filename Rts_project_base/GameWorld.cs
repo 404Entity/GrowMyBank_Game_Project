@@ -83,6 +83,7 @@ namespace Rts_project_base
             //intialize the componets of the gameworld
             gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1,"GoldMinene"));
             //gameObjectList.Add(new Bank(new Vector2(200, 200), @"\hello", 1));
+            gameObjectList.Add(new Bank(new Vector2(600, 200), @"Images\Bank.png", 0.4f, "Bank"));
             GameForm.runGame = true;
         }
         public void Draw()
@@ -140,10 +141,10 @@ namespace Rts_project_base
             draws.DrawString(string.Format("FPS: {0}", currentFps), f, Brushes.Black, 550, 0);
 
             Font counter = new Font("Arial Black", 14);
-            string gold = Bank.goldCount.ToString();
+            string gold = Bank.GoldCount.ToString();
             draws.DrawString(string.Format("Gold: {0}", gold), counter, Brushes.Black, 680, 10);
 
-            string coal = Bank.coalCount.ToString();
+            string coal = Bank.CoalCount.ToString();
             draws.DrawString(string.Format("Coal: {0}", coal), counter, Brushes.Black, 800, 10);
 
             //string gold = Bank.goldCount.ToString();
@@ -155,15 +156,12 @@ namespace Rts_project_base
             ///<summary>
             ///Updates the state of the gameobjects
             /// </summary>
-            /*
+            gameListKey.WaitOne();
              foreach(GameObject gO in gameObjectList)
              {
-             gO.Update(Fps)
-             {
-
-             }
+                gO.Update(currentFps);
             }
-             */
+             
             foreach (GameObject item in AddGameObject)
             {
                 gameListKey.WaitOne();

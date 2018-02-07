@@ -19,7 +19,8 @@ namespace Rts_project_base
         protected Vector2 originPoint;
         protected float scaleFactor;
         protected List<Image> animationFrames;
-        string objectName;
+        private string objectName;
+        private RectangleF collisionBox;
         #endregion
 
         #region Property
@@ -33,6 +34,19 @@ namespace Rts_project_base
             get { return objectName; }
             set { objectName = value; }
         }
+        public RectangleF CollisionBox {
+            get { return collisionBox; }
+            set { collisionBox = value; }
+        }
+        /*  
+public RectangleF CollisionBox
+{
+   get
+   {
+           return new RectangleF(position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
+       }
+}
+*/
         #endregion
         #region Constructor
         public GameObject(Vector2 position, string spritePath, float scaleFactor, string name)
@@ -50,15 +64,9 @@ namespace Rts_project_base
             }
 
             this.sprite = this.animationFrames[0];
+            collisionBox = new RectangleF(position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
         }
 
-        public RectangleF CollisionBox
-        {
-            get
-            {
-                return new RectangleF(position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
-            }
-        }
         #endregion
 
 
@@ -71,13 +79,20 @@ namespace Rts_project_base
             {
                 dc.DrawRectangle(new Pen(Brushes.Yellow, 2), position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
             }
-            dc.DrawRectangle(new Pen(Brushes.Green), position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
+            dc.DrawRectangle(new Pen(Brushes.Green), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height );
 #endif
         }
         public bool ishovered;
-        public virtual void Update()
+        public void UpdateColisionBox()
         {
+            collisionBox.X = position.X;
+            collisionBox.Y = position.Y;
+        }
+        public virtual void Update(float fps)
+        {
+
             CalcCenterPoint();
+            UpdateColisionBox();
         }
         public void CalcCenterPoint()
         {
