@@ -168,7 +168,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load_1);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseClick);
-            this.MouseHover += new System.EventHandler(this.GameForm_MouseHover);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 using System.Reflection;
+using System.Numerics;
 
 namespace Rts_project_base
 {
@@ -119,19 +120,15 @@ namespace Rts_project_base
         {
             label1.Invoke((MethodInvoker)delegate { label1.Text = Cursor.Position.X.ToString(); });
             label2.Invoke((MethodInvoker)delegate { label2.Text = Cursor.Position.Y.ToString(); });
+            if (selectedObject != null)
+            {
+                label3.Invoke((MethodInvoker)delegate { label3.Text = selectedObject.ObjectName; });
+            }
 
         }
         private void GameForm_MouseClick(object sender, MouseEventArgs e)
         {
-            if (selectedWorker != null)
-            {
-                label3.Invoke((MethodInvoker)delegate { label3.Text = selectedWorker.ObjectName; });
-            }
-            else
-            {
-                label3.Invoke((MethodInvoker)delegate { label3.Text = GameForm.MousePosition.X.ToString(); });
-            }
-
+    
             label4.Invoke((MethodInvoker)delegate { label4.Text = GameForm.MousePosition.Y.ToString(); });
 
             string showString = "X" + Cursor.Position.X + " : " + "Y" + Cursor.Position.Y;
@@ -173,7 +170,7 @@ namespace Rts_project_base
                     if (item is Worker)
                     {
                         selectedWorker = item;
-                        //MessageBox.Show(selectedObject.ObjectName);
+                        selectedObject = item;
                     }
                     else
                     {
@@ -182,6 +179,7 @@ namespace Rts_project_base
 
                 }
             }
+            //Worker.onClickMoveToPosition = new Vector2(Cursor.Position.X, Cursor.Position.Y); this is wrong
         }
 
         private void HandleWorker(Worker worker)
@@ -190,6 +188,7 @@ namespace Rts_project_base
             worker.Working = true;
             worker.Destination = new System.Numerics.Vector2(destinationObject.Position.X, destinationObject.Position.Y);
             selectedWorker = null;
+            selectedObject = null;
             destinationObject = null;
         }
         private void HandleWorker(Worker worker, float x, float y)
@@ -197,31 +196,14 @@ namespace Rts_project_base
             //Moves worker to location when no building is given
             worker.Destination = new System.Numerics.Vector2(x, y);
             worker.Moving = true;
-            //bugged
+            selectedWorker = null;
             SelectedObject = null;
 
-        }
-        
-        private void GameForm_MouseHover(object sender, EventArgs e)
-        {
-            /*
-            foreach (GameObject item in gm.GameObjectList)
-            {
-                if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
-                {
-                    item.ishovered = true;
-                }
-                else
-                {
-                    item.ishovered = false;
-                }
-            }
-            */
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Bank.Upgrade();
         }
 
     }

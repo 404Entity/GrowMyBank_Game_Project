@@ -20,9 +20,12 @@ namespace Rts_project_base
         private bool moving;
         Vector2 destination;
         Mine currentMine;
+        Ressources carry;
+        // argh plz stop this.
+        //public static Vector2 onClickMoveToPosition;
         #endregion
         #region Property
-       
+
         public float Speed { get { return speed; } set { speed = value; } }
         public bool Working
         {
@@ -51,6 +54,7 @@ namespace Rts_project_base
         {
             //starts the workers thread
             InitWorkerThread();
+            speed = 1;
         }
         #endregion
         #region Methods
@@ -72,18 +76,30 @@ namespace Rts_project_base
             {
                 if (carryingResource)
                 {
-
+                    DepositResource();
+                    carryingResource = false;
                 }
                 if (working)
                 {
-                    MoveTo(destination.X, destination.Y);
-                    Mine();
-                    working = false;
+                    //MoveToPosition(currentFPS, destination);
+                    if (position != destination)
+                    {
+                        Mine();
+                        currentMine = null;
+                    
+                        working = false;
+                    }
+              
+
                 }
                 else if (moving)
                 {
-                    MoveTo(destination.X, destination.Y);
-                    moving = false;
+                    MoveToPosition(currentFPS, destination);
+                    if (position == destination)
+                    {
+                        moving = false;
+                    }
+
                 }
             }
         }   
@@ -92,16 +108,47 @@ namespace Rts_project_base
             // wait until acess to the mine is granted
             currentMine.EnteranceKey.WaitOne();
             GameWorld.RemoveGameObject.Add(this);
-            Thread.Sleep(3000);//simulates the worker mining
+            if (Bank.UpgradeTwo)
+            {
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                Thread.Sleep(3000);//simulates the worker mining
+            }
+            
             carryingResource = true;
+            carry = currentMine.Resources;
+            position.X = currentMine.OriginPoint.X;
+            position.Y = currentMine.OriginPoint.Y + (currentMine.OriginPoint.Y - currentMine.Position.Y); 
             GameWorld.AddGameObject.Add(this);
             // releaser key so ohter members ca acces the mine
+
             currentMine.EnteranceKey.Release();
         }
-        public void MoveTo(float x, float y)
+        //Mangler parameter (float fps) //Fixed
+        public void MoveToPosition(float fps, Vector2 deposition)
         {
-            position.X = x;
-            position.Y = y;
+   
+            Vector2 velosity = Vector2.Normalize(deposition - this.position);
+
+            {
+                    this.position.X += (1 * (velosity.X * speed)) / (fps * 120);
+                    this.position.Y += (1 * (velosity.Y * speed)) / (fps * 120);
+            }
+
+        }
+        public void DepositResource()
+        {
+            if(carry == Ressources.Gold)
+            {
+                Bank.GoldCount += 300;
+            }
+            else
+            {
+                Bank.CoalCount += 15;
+            }
+            
         }
         #endregion
 
