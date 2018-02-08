@@ -203,7 +203,7 @@ namespace Rts_project_base
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            Bank.Upgrade();
         }
 
     }
