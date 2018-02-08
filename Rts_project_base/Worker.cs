@@ -20,6 +20,7 @@ namespace Rts_project_base
         private bool moving;
         Vector2 destination;
         Mine currentMine;
+        Ressources carry;
         // argh plz stop this.
         //public static Vector2 onClickMoveToPosition;
         #endregion
@@ -117,6 +118,7 @@ namespace Rts_project_base
             }
             
             carryingResource = true;
+            carry = currentMine.Resources;
             position.X = currentMine.OriginPoint.X;
             position.Y = currentMine.OriginPoint.Y + (currentMine.OriginPoint.Y - currentMine.Position.Y); 
             GameWorld.AddGameObject.Add(this);
@@ -138,7 +140,15 @@ namespace Rts_project_base
         }
         public void DepositResource()
         {
-            Bank.GoldCount += 300;
+            if(carry == Ressources.Gold)
+            {
+                Bank.GoldCount += 300;
+            }
+            else
+            {
+                Bank.CoalCount += 15;
+            }
+            
         }
         #endregion
 

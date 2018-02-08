@@ -81,7 +81,8 @@ namespace Rts_project_base
         private void Setup()
         {
             //intialize the componets of the gameworld
-            gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1,"GoldMinene"));
+            GameObjectList.Add(new Mine(new Vector2(200, 1), @"Images\Mine_Test1..png", 1, "CoalMinene", Ressources.Coal));
+            gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1,"GoldMinene",Ressources.Gold));
             gameObjectList.Add(new Bank(new Vector2(600, 200), @"Images\Bank.png", 0.4f, "Bank"));
             GameForm.runGame = true;
         }
