@@ -55,13 +55,13 @@ namespace Rts_project_base
         private BufferedGraphics backBuffer;
         private float currentFps;
         private DateTime endTime;
-        private List<GameObject> gameObjectList;
+        private static List<GameObject> gameObjectList;
         private static Mutex gameListKey= new Mutex();
         private static List<GameObject> addGameObject;
         private static List<GameObject> removeGameObject;
         #endregion
         #region Properties
-        public List<GameObject> GameObjectList
+        public static List<GameObject> GameObjectList
         {
             get { return gameObjectList; }
             set { gameObjectList = value; }

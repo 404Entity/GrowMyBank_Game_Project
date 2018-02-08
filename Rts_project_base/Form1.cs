@@ -139,7 +139,7 @@ namespace Rts_project_base
                 if (selectedWorker is Worker)
                 {
                     bool isBuilding = false;
-                    foreach (GameObject item in gm.GameObjectList)
+                    foreach (GameObject item in GameWorld.GameObjectList)
                     {
                         if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
                         {
@@ -164,7 +164,7 @@ namespace Rts_project_base
                     }
                 }
             }
-            foreach (GameObject item in gm.GameObjectList)
+            foreach (GameObject item in GameWorld.GameObjectList)
             {
                 if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
                 {

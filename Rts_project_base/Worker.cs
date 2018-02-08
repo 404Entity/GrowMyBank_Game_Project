@@ -21,8 +21,6 @@ namespace Rts_project_base
         Vector2 destination;
         Mine currentMine;
         Ressources carry;
-        // argh plz stop this.
-        //public static Vector2 onClickMoveToPosition;
         #endregion
         #region Property
 
@@ -76,10 +74,14 @@ namespace Rts_project_base
             {
                 if (carryingResource)
                 {
-                    DepositResource();
-                    carryingResource = false;
+                    MoveToPosition(currentFPS, destination);
+                    if (destination == position)
+                    {
+                        DepositResource();
+                        carryingResource = false;
+                    }
                 }
-                if (working)
+                else if (working)
                 {
                     MoveToPosition(currentFPS, destination);
                     if (position == destination)
@@ -115,7 +117,14 @@ namespace Rts_project_base
             {
                 Thread.Sleep(3000);//simulates the worker mining
             }
-
+            foreach (GameObject item in GameWorld.GameObjectList)
+            {
+                if (item is Bank)
+                {
+                    // i the case the was expanded to hold more than one bank add some code that desides the bank which bank is the neares
+                    GetBankDestination(item as Bank);
+                }
+            }
             carryingResource = true;
             carry = currentMine.Resources;
             position.X = currentMine.OriginPoint.X;
@@ -125,7 +134,10 @@ namespace Rts_project_base
 
             currentMine.EnteranceKey.Release();
         }
-        //Mangler parameter (float fps) //Fixed
+        public void GetBankDestination(Bank bank)
+        {
+            destination = bank.OriginPoint;
+        }
         public void MoveToPosition(float fps, Vector2 deposition)
         {
 

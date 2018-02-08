@@ -40,7 +40,8 @@ namespace Rts_project_base
             get { return objectName; }
             set { objectName = value; }
         }
-        public RectangleF CollisionBox {
+        public RectangleF CollisionBox
+        {
             get { return collisionBox; }
             set { collisionBox = value; }
         }
@@ -83,7 +84,7 @@ public RectangleF CollisionBox
             //Draws the sprite
             dc.DrawImage(sprite, position.X, position.Y, sprite.Width * scaleFactor, sprite.Height * scaleFactor);
 #if DEBUG
-            dc.DrawRectangle(new Pen(Brushes.Green), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height );
+            dc.DrawRectangle(new Pen(Brushes.Green), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
 #endif
         }
         // hmm probaly an unecesary feature
@@ -103,8 +104,8 @@ public RectangleF CollisionBox
         }
         public void CalcCenterPoint()
         {
-            originPoint.X = position.X + (sprite.Width / 2);
-            originPoint.Y = position.Y + (sprite.Height / 2);
+            originPoint.X = position.X + ((sprite.Width * scaleFactor) / 2);
+            originPoint.Y = position.Y + ((sprite.Height * scaleFactor) / 2);
         }
         public bool CheckCords(float x, float y)
         {
