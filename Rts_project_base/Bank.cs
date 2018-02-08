@@ -14,12 +14,14 @@ namespace Rts_project_base
         #region Fields
         private static int coalCount;
         private static int goldCount;
+        private static bool upgradeOne = true;
         private static bool upgradeTwo = false;
         #endregion
 
         #region Property
         public static int CoalCount { get { return coalCount; } set { coalCount = value; } }
         public static int GoldCount { get { return goldCount; } set { goldCount = value; } }
+        public static bool UpgradeTwo { get { return upgradeTwo; } set { upgradeTwo = value; } }
         #endregion
 
         #region Constructor
@@ -30,22 +32,23 @@ namespace Rts_project_base
         #region Methods
         public static void Upgrade()
         {
-            if (Bank.goldCount >= 500)
+            if (Bank.goldCount >= 500 && upgradeOne == true)
             {
                 //Adds new worker plus new thread for it
                 Worker worker = (new Worker(new System.Numerics.Vector2(300, 200), @"Images\worker_test..png", 0.2f, "Carl"));
                 GameWorld.AddGameObject.Add(worker);
 
-                upgradeTwo = true;
+                goldCount -= 500;
 
-                if (upgradeTwo = true && Bank.goldCount >= 750)
-                {
-
-                    Thread.Sleep(2000); //Workers sleeper thread too
-                }
+                upgradeOne = false;
+                
             }
-
-        #endregion
+            if (upgradeOne == false && Bank.goldCount >= 750)
+            {
+                upgradeTwo = true;
+                goldCount -= 750;
+            }
+            #endregion
         }
     }
 }

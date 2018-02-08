@@ -107,7 +107,15 @@ namespace Rts_project_base
             // wait until acess to the mine is granted
             currentMine.EnteranceKey.WaitOne();
             GameWorld.RemoveGameObject.Add(this);
-            Thread.Sleep(3000);//simulates the worker mining
+            if (Bank.UpgradeTwo)
+            {
+                Thread.Sleep(2000);
+            }
+            else
+            {
+                Thread.Sleep(3000);//simulates the worker mining
+            }
+            
             carryingResource = true;
             position.X = currentMine.OriginPoint.X;
             position.Y = currentMine.OriginPoint.Y + (currentMine.OriginPoint.Y - currentMine.Position.Y); 
