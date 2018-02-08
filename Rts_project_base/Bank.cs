@@ -28,7 +28,7 @@ namespace Rts_project_base
         }
         #endregion
         #region Methods
-        public void Upgrade()
+        public static void Upgrade()
         {
             if (Bank.goldCount >= 500)
             {
