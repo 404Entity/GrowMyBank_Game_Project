@@ -27,6 +27,7 @@ namespace Rts_project_base
         #region Constructor
         public Bank(Vector2 position,string spritePath, float scaleFactor, string name) : base(position,spritePath,scaleFactor,name)
         {
+            goldCount = 200;
         }
         #endregion
         #region Methods

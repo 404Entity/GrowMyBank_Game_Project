@@ -138,12 +138,14 @@ namespace Rts_project_base
             {
                 if (selectedWorker is Worker)
                 {
+                    bool isBuilding = false;
                     foreach (GameObject item in gm.GameObjectList)
                     {
                         if (item.CheckCords(Cursor.Position.X, Cursor.Position.Y))
                         {
                             if (item is Mine || item is Bank)
                             {
+                                isBuilding = true;
                                 destinationObject = item;
                                 HandleWorker(selectedWorker as Worker);
                                 // MessageBox.Show(selectedWorker.ObjectName + " go to" + destinationObject.ObjectName);
@@ -155,11 +157,10 @@ namespace Rts_project_base
                         {
                             break;
                         }
-                        else
-                        {
-                            HandleWorker(selectedWorker as Worker, Cursor.Position.X, Cursor.Position.Y);
-                            break;
-                        }
+                    }
+                    if (!isBuilding)
+                    {
+                        HandleWorker(selectedWorker as Worker, Cursor.Position.X, Cursor.Position.Y);
                     }
                 }
             }
@@ -184,9 +185,19 @@ namespace Rts_project_base
 
         private void HandleWorker(Worker worker)
         {
-            worker.CurrentBuilding = destinationObject as Mine;
-            worker.Working = true;
-            worker.Destination = new System.Numerics.Vector2(destinationObject.Position.X, destinationObject.Position.Y);
+            if (destinationObject is Mine)
+            {
+                worker.CurrentMine = destinationObject as Mine;
+                worker.Destination = new System.Numerics.Vector2(Cursor.Position.X, Cursor.Position.Y);
+                worker.Working = true;
+            }
+            else
+            {
+                worker.Destination = new System.Numerics.Vector2(Cursor.Position.X, Cursor.Position.Y);
+                worker.Moving = true;
+            }
+          
+
             selectedWorker = null;
             selectedObject = null;
             destinationObject = null;

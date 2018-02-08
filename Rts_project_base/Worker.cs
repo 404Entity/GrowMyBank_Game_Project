@@ -47,10 +47,10 @@ namespace Rts_project_base
             get { return destination; }
             set { destination = value; }
         }
-        public Mine CurrentBuilding { get { return currentMine; } set { currentMine = value; } }
+        public Mine CurrentMine { get { return currentMine; } set { currentMine = value; } }
         #endregion
         #region Constructor
-        public Worker(Vector2 position,string spritePath, float scaleFactor,string name): base(position,spritePath,scaleFactor, name)
+        public Worker(Vector2 position, string spritePath, float scaleFactor, string name) : base(position, spritePath, scaleFactor, name)
         {
             //starts the workers thread
             InitWorkerThread();
@@ -81,15 +81,14 @@ namespace Rts_project_base
                 }
                 if (working)
                 {
-                    //MoveToPosition(currentFPS, destination);
-                    if (position != destination)
+                    MoveToPosition(currentFPS, destination);
+                    if (position == destination)
                     {
                         Mine();
                         currentMine = null;
-                    
                         working = false;
                     }
-              
+
 
                 }
                 else if (moving)
@@ -102,7 +101,7 @@ namespace Rts_project_base
 
                 }
             }
-        }   
+        }
         public void Mine()
         {
             // wait until acess to the mine is granted
@@ -116,11 +115,11 @@ namespace Rts_project_base
             {
                 Thread.Sleep(3000);//simulates the worker mining
             }
-            
+
             carryingResource = true;
             carry = currentMine.Resources;
             position.X = currentMine.OriginPoint.X;
-            position.Y = currentMine.OriginPoint.Y + (currentMine.OriginPoint.Y - currentMine.Position.Y); 
+            position.Y = currentMine.OriginPoint.Y + (currentMine.OriginPoint.Y - currentMine.Position.Y);
             GameWorld.AddGameObject.Add(this);
             // releaser key so ohter members ca acces the mine
 
@@ -129,18 +128,18 @@ namespace Rts_project_base
         //Mangler parameter (float fps) //Fixed
         public void MoveToPosition(float fps, Vector2 deposition)
         {
-   
+
             Vector2 velosity = Vector2.Normalize(deposition - this.position);
 
             {
-                    this.position.X += (1 * (velosity.X * speed)) / (fps * 120);
-                    this.position.Y += (1 * (velosity.Y * speed)) / (fps * 120);
+                this.position.X += (1 * (velosity.X * speed)) / (fps * 120);
+                this.position.Y += (1 * (velosity.Y * speed)) / (fps * 120);
             }
 
         }
         public void DepositResource()
         {
-            if(carry == Ressources.Gold)
+            if (carry == Ressources.Gold)
             {
                 Bank.GoldCount += 300;
             }
@@ -148,7 +147,7 @@ namespace Rts_project_base
             {
                 Bank.CoalCount += 15;
             }
-            
+
         }
         #endregion
 
