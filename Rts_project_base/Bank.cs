@@ -16,6 +16,7 @@ namespace Rts_project_base
         private static int goldCount;
         private static bool upgradeOne = true;
         private static bool upgradeTwo = false;
+        private static bool Blocker = true;
         #endregion
 
         #region Property
@@ -44,11 +45,13 @@ namespace Rts_project_base
                 upgradeOne = false;
                 
             }
-            if (upgradeOne == false && Bank.goldCount >= 750)
+            if (upgradeOne == false && Blocker == true && Bank.goldCount >= 750)
             {
                 upgradeTwo = true;
                 goldCount -= 750;
+                Blocker = false;
             }
+            
             #endregion
         }
     }

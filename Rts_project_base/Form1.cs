@@ -88,7 +88,7 @@ namespace Rts_project_base
 
             Worker worker = (new Worker(new System.Numerics.Vector2(300, 200), @"Images\worker_test..png", 0.2f, "john"));
             GameWorld.AddGameObject.Add(worker);
-            
+            Bank.GoldCount -= 200;
         }
 
         private void label1_Click(object sender, EventArgs e)
