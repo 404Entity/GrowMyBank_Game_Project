@@ -118,7 +118,7 @@ namespace Rts_project_base
             string gold = Bank.GoldCount.ToString();
             draws.DrawString(string.Format("Gold: {0}", gold), counter, Brushes.Black, 680, 10);
 
-            string coal = Bank.coalCount.ToString();
+            string coal = Bank.CoalCount.ToString();
             draws.DrawString(string.Format("Coal: {0}", coal), counter, Brushes.Black, 800, 10);
 
             //string gold = Bank.goldCount.ToString();
