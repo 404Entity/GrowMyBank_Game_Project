@@ -82,7 +82,7 @@ namespace Rts_project_base
         {
             //intialize the componets of the gameworld
             gameObjectList.Add(new Mine(new Vector2(1, 1), @"Images\Mine_Test1..png", 1,"GoldMinene"));
-            //gameObjectList.Add(new Bank(new Vector2(200, 200), @"\hello", 1));
+            gameObjectList.Add(new Bank(new Vector2(600, 200), @"Images\Bank.png", 0.4f, "Bank"));
             GameForm.runGame = true;
         }
         public void Draw()
@@ -106,32 +106,7 @@ namespace Rts_project_base
                 
             }
             gameListKey.ReleaseMutex();
-            // Test DrawGrid 
-            /* 
-            RectangleF testRect = unitRect;
-            for (int i = 0; i < 50; i++)
-            {
-                if (i != 0)
-                {
-                    testRect.Y += testRect.Height;
-                }
-                testRect.X = unitRect.X;
-                for (int j = 0; j < 50; j++)
-                { 
-                    RectangleF instanceRect = testRect;
-                    if (j < 1)
-                    {
-                        draws.DrawRectangle(new Pen(Brushes.Red), instanceRect.X, instanceRect.Y, instanceRect.Width, instanceRect.Height);
-                    }
-                    else
-                    {
 
-                        draws.DrawRectangle(new Pen(Brushes.Red), instanceRect.X + instanceRect.Width, instanceRect.Y, instanceRect.Width, instanceRect.Height);
-                        testRect.X += instanceRect.Width;
-                    }
-                }
-          
-            }*/
             backBuffer.Render();
         }
         public void DrawUi()
@@ -140,7 +115,7 @@ namespace Rts_project_base
             draws.DrawString(string.Format("FPS: {0}", currentFps), f, Brushes.Black, 550, 0);
 
             Font counter = new Font("Arial Black", 14);
-            string gold = Bank.goldCount.ToString();
+            string gold = Bank.GoldCount.ToString();
             draws.DrawString(string.Format("Gold: {0}", gold), counter, Brushes.Black, 680, 10);
 
             string coal = Bank.coalCount.ToString();
@@ -155,28 +130,25 @@ namespace Rts_project_base
             ///<summary>
             ///Updates the state of the gameobjects
             /// </summary>
-            /*
+            gameListKey.WaitOne();
              foreach(GameObject gO in gameObjectList)
              {
-             gO.Update(Fps)
-             {
-
-             }
-            }
-             */
+                gO.Update(currentFps);
+            };
             foreach (GameObject item in AddGameObject)
             {
-                gameListKey.WaitOne();
+            
                 gameObjectList.Add(item);
-                gameListKey.ReleaseMutex();
+               
             }
             foreach (GameObject item in RemoveGameObject)
             {
-                gameListKey.WaitOne();
+            
                 GameObjectList.Remove(item);
-                gameListKey.ReleaseMutex();
+               
             }
             ClearTempLists();
+            gameListKey.ReleaseMutex();
         }
         private void ClearTempLists()
         {

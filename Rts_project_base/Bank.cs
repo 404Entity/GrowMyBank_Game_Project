@@ -12,14 +12,14 @@ namespace Rts_project_base
     class Bank : GameObject
     {
         #region Fields
-        public static int coalCount;
-        public static int goldCount;
+        private static int coalCount;
+        private static int goldCount;
         private static bool upgradeTwo = false;
         #endregion
 
         #region Property
-        public int CoalCount { get { return coalCount; } set { coalCount = value; } }
-        public int GoldCount { get { return goldCount; } set { goldCount = value; } }
+        public static int CoalCount { get { return coalCount; } set { coalCount = value; } }
+        public static int GoldCount { get { return goldCount; } set { goldCount = value; } }
         #endregion
 
         #region Constructor
