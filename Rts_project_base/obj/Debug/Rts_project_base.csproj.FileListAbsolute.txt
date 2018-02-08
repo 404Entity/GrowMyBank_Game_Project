@@ -33,3 +33,16 @@ C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\bin\De
 C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.GameForm.resources
 C:\Users\Morten\Documents\GitHub\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Images\Bank.png
 C:\Users\MIKZ\Source\Repos\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Images\Bank.png
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Images\Bank.png
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Images\Mine_Test1..png
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Images\worker_test..png
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Rts_project_base.exe.config
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Rts_project_base.exe
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\bin\Debug\Rts_project_base.pdb
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.csprojResolveAssemblyReference.cache
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.GameForm.resources
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.Properties.Resources.resources
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.csproj.GenerateResource.Cache
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.csproj.CoreCompileInputs.cache
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.exe
+C:\Users\johannes\Desktop\Projects\GrowMyBank_Game_Project\Rts_project_base\obj\Debug\Rts_project_base.pdb
